@@ -223,6 +223,35 @@ fn use_prebuilt_binding(from: &Path, to: &Path) {
     fs::copy(from, to).expect("Prebuilt binding file failed to be copied.");
 }
 
+/// Generate (or copy) the bindings into `output_binding_path`.
+///
+/// Resolution order:
+/// 1. `FFMPEG_BINDING_PATH` — copy a prebuilt binding verbatim.
+/// 2. `FFMPEG_INCLUDE_DIR` — generate bindings from the user-provided include dir.
+/// 3. `fallback_include_dir` — generate bindings from a dir discovered by the
+///    chosen linking method (e.g. pkg-config / vcpkg).
+fn write_bindings(
+    env_vars: &EnvVars,
+    output_binding_path: &Path,
+    fallback_include_dir: Option<&Path>,
+) {
+    if let Some(ffmpeg_binding_path) = env_vars.ffmpeg_binding_path.as_ref() {
+        use_prebuilt_binding(ffmpeg_binding_path, output_binding_path);
+    } else if let Some(ffmpeg_include_dir) = env_vars.ffmpeg_include_dir.as_ref() {
+        write_bindings_from_include_dir(ffmpeg_include_dir, output_binding_path);
+    } else if let Some(fallback_include_dir) = fallback_include_dir {
+        write_bindings_from_include_dir(fallback_include_dir, output_binding_path);
+    } else {
+        panic!("No binding generation method is set!");
+    }
+}
+
+fn write_bindings_from_include_dir(ffmpeg_include_dir: &Path, output_binding_path: &Path) {
+    generate_bindings(ffmpeg_include_dir, &HEADERS)
+        .write_to_file(output_binding_path)
+        .expect("Cannot write binding to file.");
+}
+
 fn generate_bindings(ffmpeg_include_dir: &Path, headers: &[PathBuf]) -> Bindings {
     if !Path::new(ffmpeg_include_dir).exists() {
         panic!(
@@ -243,6 +272,18 @@ fn generate_bindings(ffmpeg_include_dir: &Path, headers: &[PathBuf]) -> Bindings
         .collect(),
     );
 
+    let builder = bindgen::builder()
+        // Force impl Debug if possible(for `AVCodecParameters`)
+        .impl_debug(true)
+        .rust_target(RustTarget::stable(68, 0).ok().unwrap())
+        .parse_callbacks(Box::new(filter_callback))
+        // Add clang path, for `#include` header finding in bindgen process.
+        .clang_arg(format!("-I{}", ffmpeg_include_dir))
+        // Workaround: https://github.com/rust-lang/rust-bindgen/issues/2159
+        .blocklist_type("__mingw_ldbl_type_t")
+        // Stop bindgen from prefixing enums
+        .prepend_enum_name(false);
+
     // Bindgen on all avaiable headers
     headers
         .iter()
@@ -254,22 +295,7 @@ fn generate_bindings(ffmpeg_include_dir: &Path, headers: &[PathBuf]) -> Bindings
             }
             exists
         })
-        .fold(
-            {
-                bindgen::builder()
-                    // Force impl Debug if possible(for `AVCodecParameters`)
-                    .impl_debug(true)
-                    .rust_target(RustTarget::stable(68, 0).ok().unwrap())
-                    .parse_callbacks(Box::new(filter_callback))
-                    // Add clang path, for `#include` header finding in bindgen process.
-                    .clang_arg(format!("-I{}", ffmpeg_include_dir))
-                    // Workaround: https://github.com/rust-lang/rust-bindgen/issues/2159
-                    .blocklist_type("__mingw_ldbl_type_t")
-                    // Stop bindgen from prefixing enums
-                    .prepend_enum_name(false)
-            },
-            |builder, header| builder.header(header),
-        )
+        .fold(builder, |builder, header| builder.header(header))
         .generate()
         .expect("Binding generation failed.")
 }
@@ -391,13 +417,7 @@ mod vcpkg_linking {
         output_binding_path: &Path,
     ) -> Result<(), vcpkg::Error> {
         let include_paths = linking_with_vcpkg(env_vars, &*LIBS)?;
-        if let Some(ffmpeg_binding_path) = env_vars.ffmpeg_binding_path.as_ref() {
-            use_prebuilt_binding(ffmpeg_binding_path, output_binding_path);
-        } else {
-            generate_bindings(&include_paths[0], &HEADERS)
-                .write_to_file(output_binding_path)
-                .expect("Cannot write binding to file.");
-        }
+        write_bindings(env_vars, output_binding_path, Some(&include_paths[0]));
         Ok(())
     }
 }
@@ -428,16 +448,8 @@ fn dynamic_linking(env_vars: EnvVars) {
     }
 
     let output_binding_path = &env_vars.out_dir.as_ref().unwrap().join("binding.rs");
-    if let Some(ffmpeg_binding_path) = env_vars.ffmpeg_binding_path.as_ref() {
-        use_prebuilt_binding(ffmpeg_binding_path, output_binding_path);
-    } else if let Some(ffmpeg_include_dir) = env_vars.ffmpeg_include_dir.as_ref() {
-        generate_bindings(ffmpeg_include_dir, &HEADERS)
-            // Is it correct to generate binding to one file? :-/
-            .write_to_file(output_binding_path)
-            .expect("Cannot write binding to file.");
-    } else {
-        panic!("No binding generation method is set!");
-    }
+    // Binding is generated from `FFMPEG_INCLUDE_DIR` or copied from `FFMPEG_BINDING_PATH`.
+    write_bindings(&env_vars, output_binding_path, None);
 }
 
 fn linking(env_vars: EnvVars) {
@@ -457,18 +469,7 @@ fn linking(env_vars: EnvVars) {
                     .map(|x| x.is_static())
                     .unwrap_or_default(),
             )?;
-            if let Some(ffmpeg_binding_path) = env_vars.ffmpeg_binding_path.as_ref() {
-                use_prebuilt_binding(ffmpeg_binding_path, output_binding_path);
-            } else if let Some(ffmpeg_include_dir) = env_vars.ffmpeg_include_dir.as_ref() {
-                // If use ffmpeg_pkg_config_path with ffmpeg_include_dir, prefer using the user given dir rather than pkg_config_path.
-                generate_bindings(ffmpeg_include_dir, &HEADERS)
-                    .write_to_file(output_binding_path)
-                    .expect("Cannot write binding to file.");
-            } else {
-                generate_bindings(&include_paths[0], &HEADERS)
-                    .write_to_file(output_binding_path)
-                    .expect("Cannot write binding to file.");
-            }
+            write_bindings(env_vars, output_binding_path, Some(&include_paths[0]));
             Ok(())
         }
         // Hint: set PKG_CONFIG_PATH to some placeholder value will let pkg_config probing system library.
@@ -488,15 +489,7 @@ fn linking(env_vars: EnvVars) {
                 ffmpeg_libs_dir,
                 env_vars.ffmpeg_link_mode.unwrap_or(FFmpegLinkMode::Static),
             );
-            if let Some(ffmpeg_binding_path) = env_vars.ffmpeg_binding_path.as_ref() {
-                use_prebuilt_binding(ffmpeg_binding_path, output_binding_path);
-            } else if let Some(ffmpeg_include_dir) = env_vars.ffmpeg_include_dir.as_ref() {
-                generate_bindings(ffmpeg_include_dir, &HEADERS)
-                    .write_to_file(output_binding_path)
-                    .expect("Cannot write binding to file.");
-            } else {
-                panic!("No binding generation method is set!");
-            }
+            write_bindings(&env_vars, output_binding_path, None);
         } else {
             #[cfg(not(any(feature = "link_system_ffmpeg", feature = "link_vcpkg_ffmpeg")))]
             panic!(
@@ -550,15 +543,7 @@ Enable `link_vcpkg_ffmpeg` feature if you want to link ffmpeg libraries installe
                 ffmpeg_libs_dir,
                 env_vars.ffmpeg_link_mode.unwrap_or(FFmpegLinkMode::Static),
             );
-            if let Some(ffmpeg_binding_path) = env_vars.ffmpeg_binding_path.as_ref() {
-                use_prebuilt_binding(ffmpeg_binding_path, output_binding_path);
-            } else if let Some(ffmpeg_include_dir) = env_vars.ffmpeg_include_dir.as_ref() {
-                generate_bindings(ffmpeg_include_dir, &HEADERS)
-                    .write_to_file(output_binding_path)
-                    .expect("Cannot write binding to file.");
-            } else {
-                panic!("No binding generation method is set!");
-            }
+            write_bindings(&env_vars, output_binding_path, None);
         } else {
             #[cfg(feature = "link_vcpkg_ffmpeg")]
             vcpkg_linking::linking_with_vcpkg_and_bindgen(&env_vars, output_binding_path)
