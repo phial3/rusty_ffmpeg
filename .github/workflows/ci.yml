@@ -657,6 +657,7 @@ jobs:
           i686-w64-mingw32-gcc -shared -o libffmpeg.dll \
             -Wl,--out-implib,libffmpeg.lib \
             -Wl,--whole-archive *.a -Wl,--no-whole-archive \
+            -Wl,--allow-multiple-definition \
             -lgdi32 \
             -lpsapi \
             -lole32 \
@@ -942,6 +943,7 @@ jobs:
           i686-w64-mingw32-gcc -shared -o libffmpeg.dll \
             -Wl,--out-implib,libffmpeg.lib \
             -Wl,--whole-archive *.a -Wl,--no-whole-archive \
+            -Wl,--allow-multiple-definition \
             -lgdi32 \
             -lpsapi \
             -lole32 \
