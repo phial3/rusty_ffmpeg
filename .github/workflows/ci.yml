@@ -765,9 +765,9 @@ jobs:
             libmp3lame-dev \
             libopus-dev
 
-      - name: Build FFmpeg 9.0
+      - name: Build FFmpeg 9.0.1
         run: |
-          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch release/9.0
+          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch n9.0.1
           cd ffmpeg
           mkdir build
           cd build
@@ -817,9 +817,9 @@ jobs:
           cp -r ./build ~/x264_prebuilt
           cd ../..
 
-      - name: Build FFmpeg 9.0 dylib
+      - name: Build FFmpeg 9.0.1 dylib
         run: |
-          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch release/9.0
+          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch n9.0.1
           cd ffmpeg
           mkdir build
           cd build
@@ -903,9 +903,9 @@ jobs:
           make install
           cp -r ./build ~/x264_prebuilt_cross
           cd ../..
-      - name: Build FFmpeg 9.0
+      - name: Build FFmpeg 9.0.1
         run: |
-          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch release/9.0
+          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch n9.0.1
           cd ffmpeg
           mkdir build
           cd build
