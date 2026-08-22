@@ -1,5 +1,5 @@
 use bindgen::RustTarget;
-use bindgen::{callbacks, Bindings};
+use bindgen::{Bindings, callbacks};
 use camino::Utf8Path as Path;
 use camino::Utf8PathBuf as PathBuf;
 use once_cell::sync::Lazy;
@@ -278,7 +278,9 @@ fn generate_bindings(ffmpeg_include_dir: &Path, headers: &[PathBuf]) -> Bindings
     let builder = bindgen::builder()
         // Force impl Debug if possible(for `AVCodecParameters`)
         .impl_debug(true)
-        .rust_target(RustTarget::stable(68, 0).ok().unwrap())
+        // Rust 1.82 stabilizes `unsafe extern` blocks, which are required
+        // by the `unsafe_extern_blocks` lint under edition 2024.
+        .rust_target(RustTarget::stable(82, 0).ok().unwrap())
         .parse_callbacks(Box::new(filter_callback))
         // Add clang path, for `#include` header finding in bindgen process.
         .clang_arg(format!("-I{}", ffmpeg_include_dir))
@@ -483,7 +485,9 @@ fn linking(env_vars: EnvVars) {
                     ffmpeg_pkg_config_path
                 );
             }
-            env::set_var("PKG_CONFIG_PATH", ffmpeg_pkg_config_path);
+            // `env::set_var` is `unsafe` since edition 2024 (not thread-safe).
+            // The build script is single-threaded here, so this is sound.
+            unsafe { env::set_var("PKG_CONFIG_PATH", ffmpeg_pkg_config_path) };
             linking_with_pkg_config_and_bindgen(&env_vars, output_binding_path)
                 .expect("Static linking with pkg-config failed.");
         } else if let Some(ffmpeg_libs_dir) = env_vars.ffmpeg_libs_dir.as_ref() {

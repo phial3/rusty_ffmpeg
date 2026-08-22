@@ -69,7 +69,7 @@ pub unsafe fn av_make_error_string(
     errbuf_size: usize,
     errnum: c_int
 ) -> *mut c_char {
-    ffi::av_strerror(errnum, errbuf, errbuf_size);
+    unsafe { ffi::av_strerror(errnum, errbuf, errbuf_size) };
     errbuf
 }
 
