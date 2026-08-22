@@ -35,6 +35,9 @@ static HEADERS: Lazy<Vec<PathBuf>> = Lazy::new(|| {
         "libavcodec/defs.h",
         "libavcodec/dirac.h",
         "libavcodec/dv_profile.h",
+        // Public EXIF parsing API, available since FFmpeg 8.1
+        // (missing headers are skipped with a warning on older FFmpeg)
+        "libavcodec/exif.h",
         // "libavcodec/dxva2.h",
         "libavcodec/jni.h",
         "libavcodec/mediacodec.h",
@@ -574,7 +577,7 @@ fn docs_rs_linking(env_vars: EnvVars) {
 
 /// When use_prebuilt_binding feature is enabled, use the prebuilt binding
 /// from src/binding.rs. This is useful when the system FFmpeg version
-/// doesn't match the expected API (e.g., system has FFmpeg 6 but we need FFmpeg 7).
+/// doesn't match the expected API (e.g., system has FFmpeg 6 but we need FFmpeg 9).
 #[cfg(feature = "use_prebuilt_binding")]
 fn use_prebuilt_binding_feature(env_vars: &EnvVars) {
     let binding_file_path = &env_vars.out_dir.as_ref().unwrap().join("binding.rs");
@@ -593,7 +596,7 @@ fn main() {
     }
 
     // If use_prebuilt_binding feature is enabled, overwrite the generated binding
-    // with our prebuilt one to ensure consistent FFmpeg 7 API signatures
+    // with our prebuilt one to ensure consistent FFmpeg 9 API signatures
     #[cfg(feature = "use_prebuilt_binding")]
     use_prebuilt_binding_feature(&EnvVars::init());
 }

@@ -9,7 +9,7 @@ use std::{
     ptr, slice,
 };
 
-// This should only be used with FFmpeg 7
+// This should only be used with FFmpeg 7/8/9
 fn main() {
     let filepath: CString = CString::new("./examples/slice/bear.mp4").unwrap();
 
