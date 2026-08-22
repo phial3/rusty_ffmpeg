@@ -851,6 +851,11 @@ jobs:
           make install
           cd build/lib/
           cp ~/x264_prebuilt/lib/libx264.a .
+          # FFmpeg 9 ships libswscale/framepool.c, a shim that directly
+          # includes libavfilter/framepool.c, so both archives define the
+          # same ff_frame_pool_* symbols, which breaks -all_load linking.
+          # Drop one copy (they are compiled from the same source file).
+          ar d libswscale.a framepool.o
           gcc -shared -o libffmpeg.dylib \
             -framework CoreFoundation \
             -framework CoreMedia \
