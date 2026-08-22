@@ -6,6 +6,10 @@ mod avutil;
     non_upper_case_globals,
     improper_ctypes,
     unnecessary_transmutes,
+    // bindgen emits libc function declarations (malloc/bcmp/strlen, ...) for
+    // symbols pulled in through FFmpeg headers, which trips this rustc lint
+    // (warn-by-default since Rust 1.89) under `-D warnings`.
+    suspicious_runtime_symbol_definitions,
     clippy::all
 )]
 pub mod ffi {
