@@ -6,7 +6,6 @@ edition = "2024"
 rust-version = "1.85"
 description = "A library that provides Rust bindings for FFmpeg"
 documentation = "https://docs.rs/rusty_ffmpeg"
-homepage = "https://github.com/CCExtractor/rusty_ffmpeg/"
 repository = "https://github.com/CCExtractor/rusty_ffmpeg/"
 license = "MIT"
 
