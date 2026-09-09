@@ -66,6 +66,7 @@ jobs:
             --disable-debug \
             --disable-programs \
             --disable-doc \
+            --disable-bsfs \
             --disable-autodetect \
             --disable-x86asm
           make -j$(nproc)
@@ -143,14 +144,15 @@ jobs:
           cd ffmpeg
           mkdir build
           cd build
-          # Disable exr,phm to workaround "multiple definition of 'ff_init_half2float_tables'"
+          # `--disable-decoder=exr,phm`: workaround "multiple definition of 'ff_init_half2float_tables'"
           # Ref: `https://github.com/larksuite/rsmpeg/pull/98#issuecomment-1467511193`
+          # `--disable-bsfs`: neither the binding tests nor the examples use bitstream filters.
+          DISABLE_COMPONENTS="--disable-decoder=exr --disable-bsfs"
           # The phm decoder doesn't exist before FFmpeg 5.1.
-          DISABLE_DECODERS="--disable-decoder=exr,phm"
-          if [[ "${{ matrix.branch }}" == release/5.* ]]; then
-            DISABLE_DECODERS="--disable-decoder=exr"
+          if [[ "${{ matrix.branch }}" != release/5.* ]]; then
+            DISABLE_COMPONENTS="$DISABLE_COMPONENTS --disable-decoder=phm"
           fi
-          ../configure $DISABLE_DECODERS --prefix=${PWD}/build
+          ../configure $DISABLE_COMPONENTS --prefix=${PWD}/build
           make -j$(nproc)
           make install
           cp -r ./build ~/ffmpeg_build
@@ -168,10 +170,10 @@ jobs:
           FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
           cargo test --features ${{ matrix.feature }} --verbose
 
-      # The slice example uses AVCodecParameters.ch_layout,
-      # which is only available since FFmpeg 5.1.
+      # The slice example uses AVCodecParameters.ch_layout and
+      # AVCodecContext.frame_num, which are only available since FFmpeg 6.0.
       - name: Run Slice Example
-        if: matrix.branch != 'release/5.0'
+        if: matrix.branch != 'release/5.0' && matrix.branch != 'release/5.1'
         run: |
           FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
           FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
@@ -546,10 +548,10 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      # The slice example uses AVCodecParameters.ch_layout,
-      # which is only available since FFmpeg 5.1.
+      # The slice example uses AVCodecParameters.ch_layout and
+      # AVCodecContext.frame_num, which are only available since FFmpeg 6.0.
       - name: Run Slice Example
-        if: matrix.branch != 'release/5.0'
+        if: matrix.branch != 'release/5.0' && matrix.branch != 'release/5.1'
         env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt/lib/libffmpeg.so
@@ -653,10 +655,10 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      # The slice example uses AVCodecParameters.ch_layout,
-      # which is only available since FFmpeg 5.1.
+      # The slice example uses AVCodecParameters.ch_layout and
+      # AVCodecContext.frame_num, which are only available since FFmpeg 6.0.
       - name: Run Slice Example
-        if: matrix.branch != 'release/5.0'
+        if: matrix.branch != 'release/5.0' && matrix.branch != 'release/5.1'
         env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt/lib/libffmpeg.dylib
@@ -823,10 +825,10 @@ jobs:
           version: "10.0"
           directory: ${{ github.workspace }}/clang
 
-      # The slice example uses AVCodecParameters.ch_layout,
-      # which is only available since FFmpeg 5.1.
+      # The slice example uses AVCodecParameters.ch_layout and
+      # AVCodecContext.frame_num, which are only available since FFmpeg 6.0.
       - name: Run Slice Example
-        if: matrix.branch != 'release/5.0'
+        if: matrix.branch != 'release/5.0' && matrix.branch != 'release/5.1'
         env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt_cross/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt_cross/lib/libffmpeg.dll
