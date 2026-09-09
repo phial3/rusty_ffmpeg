@@ -98,9 +98,16 @@ fn main() {
                 );
             }
             ffi::AVMEDIA_TYPE_AUDIO => {
+                // AVCodecParameters.ch_layout was introduced in FFmpeg 5.1;
+                // the deprecated `channels` field survived until 6.1 and was
+                // removed in 7.0.
+                #[cfg(feature = "ffmpeg5_1")]
+                let nb_channels = local_codec_params.ch_layout.nb_channels;
+                #[cfg(all(feature = "ffmpeg5", not(feature = "ffmpeg7")))]
+                let nb_channels = local_codec_params.channels;
                 println!(
                     "Audio Codec: {} channels, sample rate {}",
-                    local_codec_params.ch_layout.nb_channels, local_codec_params.sample_rate
+                    nb_channels, local_codec_params.sample_rate
                 );
             }
             _ => {}
@@ -175,18 +182,28 @@ fn decode_packet(
                 "Error while receiving a frame from the decoder.",
             ));
         } else {
+            // AVCodecContext.frame_num was introduced in FFmpeg 6.0; the
+            // deprecated frame_number counter survived until 6.1 (removed in 7.0).
+            #[cfg(feature = "ffmpeg6")]
+            let frame_num = codec_context.frame_num;
+            #[cfg(all(feature = "ffmpeg5", not(feature = "ffmpeg7")))]
+            let frame_num = codec_context.frame_number;
+            // AVFrame.duration (6.0+) replaced pkt_duration, which survived
+            // until 6.1 and was removed in 7.0.
+            #[cfg(feature = "ffmpeg6")]
+            let duration = frame.duration;
+            #[cfg(all(feature = "ffmpeg5", not(feature = "ffmpeg7")))]
+            let duration = frame.pkt_duration;
             println!(
-                "Frame {} (type={}, size={} bytes) pts {}",
-                codec_context.frame_num,
+                "Frame {} (type={}, size={} bytes) pts {} duration {}",
+                frame_num,
                 unsafe { ffi::av_get_picture_type_char(frame.pict_type) },
                 frame.linesize[0] * frame.height,
                 frame.pts,
+                duration,
             );
 
-            let frame_filename = format!(
-                "./examples/slice/output/frame-{}.pgm",
-                codec_context.frame_num
-            );
+            let frame_filename = format!("./examples/slice/output/frame-{}.pgm", frame_num);
             let width = frame.width as usize;
             let height = frame.height as usize;
             let wrap = frame.linesize[0] as usize;

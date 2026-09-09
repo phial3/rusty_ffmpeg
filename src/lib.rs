@@ -13,7 +13,8 @@ mod avutil;
     clippy::all
 )]
 pub mod ffi {
-    #[cfg(feature = "ffmpeg6")]
+    // AVChannelLayout-based constants require FFmpeg 5.1+
+    #[cfg(feature = "ffmpeg5_1")]
     pub use crate::avutil::channel_layout::*;
     pub use crate::avutil::{_avutil::*, common::*, error::*, pixfmt::*, rational::*};
     include!(concat!(env!("OUT_DIR"), "/binding.rs"));

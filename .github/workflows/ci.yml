@@ -33,7 +33,7 @@ jobs:
       matrix:
         include:
           - { branch: "release/5.0", feature: "ffmpeg5" }
-          - { branch: "release/5.1", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
           - { branch: "release/6.0", feature: "ffmpeg6" }
           - { branch: "release/6.1", feature: "ffmpeg6_1" }
           - { branch: "release/7.0", feature: "ffmpeg7" }
@@ -87,7 +87,7 @@ jobs:
       matrix:
         include:
           - { branch: "release/5.0", feature: "ffmpeg5" }
-          - { branch: "release/5.1", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
           - { branch: "release/6.0", feature: "ffmpeg6" }
           - { branch: "release/6.1", feature: "ffmpeg6_1" }
           - { branch: "release/7.0", feature: "ffmpeg7" }
@@ -170,14 +170,12 @@ jobs:
           FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
           cargo test --features ${{ matrix.feature }} --verbose
 
-      # The slice example uses AVCodecParameters.ch_layout and
-      # AVCodecContext.frame_num, which are only available since FFmpeg 6.0.
-      - name: Run Slice Example
-        if: matrix.branch != 'release/5.0' && matrix.branch != 'release/5.1'
+      - name: Run Examples
         run: |
           FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
           FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
           cargo run --example slice --features ${{ matrix.feature }}
+          cargo run --example version_compat --features ${{ matrix.feature }}
 
       - name: Check test result correctness
         run: |
@@ -426,7 +424,7 @@ jobs:
       matrix:
         include:
           - { branch: "release/5.0", feature: "ffmpeg5" }
-          - { branch: "release/5.1", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
           - { branch: "release/6.0", feature: "ffmpeg6" }
           - { branch: "release/6.1", feature: "ffmpeg6_1" }
           - { branch: "release/7.0", feature: "ffmpeg7" }
@@ -548,10 +546,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      # The slice example uses AVCodecParameters.ch_layout and
-      # AVCodecContext.frame_num, which are only available since FFmpeg 6.0.
       - name: Run Slice Example
-        if: matrix.branch != 'release/5.0' && matrix.branch != 'release/5.1'
         env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt/lib/libffmpeg.so
@@ -568,7 +563,7 @@ jobs:
       matrix:
         include:
           - { branch: "release/5.0", feature: "ffmpeg5" }
-          - { branch: "release/5.1", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
           - { branch: "release/6.0", feature: "ffmpeg6" }
           - { branch: "release/6.1", feature: "ffmpeg6_1" }
           - { branch: "release/7.0", feature: "ffmpeg7" }
@@ -655,10 +650,7 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      # The slice example uses AVCodecParameters.ch_layout and
-      # AVCodecContext.frame_num, which are only available since FFmpeg 6.0.
       - name: Run Slice Example
-        if: matrix.branch != 'release/5.0' && matrix.branch != 'release/5.1'
         env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt/lib/libffmpeg.dylib
@@ -675,7 +667,7 @@ jobs:
       matrix:
         include:
           - { branch: "release/5.0", feature: "ffmpeg5" }
-          - { branch: "release/5.1", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
           - { branch: "release/6.0", feature: "ffmpeg6" }
           - { branch: "release/6.1", feature: "ffmpeg6_1" }
           - { branch: "release/7.0", feature: "ffmpeg7" }
@@ -790,7 +782,7 @@ jobs:
       matrix:
         include:
           - { branch: "release/5.0", feature: "ffmpeg5" }
-          - { branch: "release/5.1", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
           - { branch: "release/6.0", feature: "ffmpeg6" }
           - { branch: "release/6.1", feature: "ffmpeg6_1" }
           - { branch: "release/7.0", feature: "ffmpeg7" }
@@ -825,10 +817,7 @@ jobs:
           version: "10.0"
           directory: ${{ github.workspace }}/clang
 
-      # The slice example uses AVCodecParameters.ch_layout and
-      # AVCodecContext.frame_num, which are only available since FFmpeg 6.0.
       - name: Run Slice Example
-        if: matrix.branch != 'release/5.0' && matrix.branch != 'release/5.1'
         env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt_cross/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt_cross/lib/libffmpeg.dll
