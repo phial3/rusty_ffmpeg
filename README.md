@@ -55,14 +55,15 @@ You can link FFmpeg libraries installed by vcpkg by enabling feature `link_vcpkg
 ### Use a specific FFmpeg version
 
 - Do nothing when you are using FFmpeg `4.*`
-- Enable `ffmpeg5` feature when you are using FFmpeg `5.*`
+- Enable `ffmpeg5` feature when you are using FFmpeg `5.0.*`
+- Enable `ffmpeg5_1` feature when you are using FFmpeg `5.1.*`
 - Enable `ffmpeg6` feature when you are using FFmpeg `6.0.*`
 - Enable `ffmpeg6_1` feature when you are using FFmpeg `6.1.*`
 - Enable `ffmpeg7` feature when you are using FFmpeg `7.0.*`
 - Enable `ffmpeg7_1` feature when you are using FFmpeg `7.1.*`
 - Enable `ffmpeg8` feature when you are using FFmpeg `8.0.*`
 - Enable `ffmpeg8_1` feature when you are using FFmpeg `8.1.*`
-- Enable `ffmpeg9` feature when you are using FFmpeg `9.*`
+- Enable `ffmpeg9` feature when you are using FFmpeg `9.0.*`
 
 ## Attention
 

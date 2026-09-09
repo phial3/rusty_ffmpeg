@@ -1,5 +1,4 @@
-use bindgen::RustTarget;
-use bindgen::{Bindings, callbacks};
+use bindgen::{Bindings, RustTarget, callbacks};
 use camino::Utf8Path as Path;
 use camino::Utf8PathBuf as PathBuf;
 use once_cell::sync::Lazy;
@@ -280,7 +279,7 @@ fn generate_bindings(ffmpeg_include_dir: &Path, headers: &[PathBuf]) -> Bindings
         .impl_debug(true)
         // Rust 1.82 stabilizes `unsafe extern` blocks, which are required
         // by the `unsafe_extern_blocks` lint under edition 2024.
-        .rust_target(RustTarget::stable(82, 0).ok().unwrap())
+        .rust_target(RustTarget::stable(85, 0).ok().unwrap())
         .parse_callbacks(Box::new(filter_callback))
         // Add clang path, for `#include` header finding in bindgen process.
         .clang_arg(format!("-I{}", ffmpeg_include_dir))
