@@ -46,8 +46,10 @@
 //! | 6.1     | `AV_FRAME_FLAG_*`, `av_frame_replace()`, more `AV_CH_LAYOUT_*`               |
 //! | 7.0     | `av_channel_layout_retype()`, `av_frame_side_data_clone()`, more layouts     |
 //! | 7.1     | `avcodec_get_supported_config()`, `AVERROR_HTTP_TOO_MANY_REQUESTS`, surround |
-//! | 8.0     | `AV_CHAN_BINAURAL_*`, binaural layouts                                       |
-//! | 8.1     | `avcodec_receive_frame_flags()`, `AVAlphaMode`                               |
+//! | 8.0     | `AV_CHAN_BINAURAL_*`, binaural layouts                               |
+//! | 8.1     | `avcodec_receive_frame_flags()`, `AVAlphaMode`                       |
+//! | 9.0     | `AVFMT_FIXED_FRAMESIZE`, `AV_CODEC_FLAG2_FIXED_FRAME_SIZE`,          |
+//! |         | `AVStreamGroupLayeredVideo`, `AV_PKT_DATA_HEVC_CONF`                 |
 //!
 //! Note: `av_init_packet()` is deprecated since 4.4 but still present in
 //! 9.0; prefer `av_packet_alloc()`.
@@ -81,6 +83,7 @@ fn main() {
     demo_avcodec_close();
     demo_packet_allocation();
     demo_8_1_additions();
+    demo_9_0_additions();
     println!("\nversion-compat demo finished");
 }
 
@@ -127,7 +130,9 @@ fn demo_codecpar_channels() {
         // 5.0-only: no AVChannelLayout at all, the old helper is the only way.
         #[cfg(all(feature = "ffmpeg5", not(feature = "ffmpeg5_1")))]
         {
-            let mask = ffi::av_get_default_channel_layout(2);
+            // 5.0's old helper returns i64, while the deprecated plain
+            // `channel_layout` field is u64, so cast.
+            let mask = ffi::av_get_default_channel_layout(2) as u64;
             par.channels = 2;
             par.channel_layout = mask;
             println!(
@@ -485,5 +490,34 @@ fn demo_8_1_additions() {
         let _keep = ffi::avcodec_receive_frame_flags;
         assert_eq!(ffi::AVALPHA_MODE_UNSPECIFIED, 0);
         println!("avcodec_receive_frame_flags + AVALPHA_MODE_UNSPECIFIED (8.1+) OK");
+    }
+}
+
+/// Additions in FFmpeg 9.0 (verified against the 9.0.1 headers):
+/// constants/flags and the renamed `AVStreamGroup` struct.
+fn demo_9_0_additions() {
+    #[cfg(feature = "ffmpeg9")]
+    {
+        // avformat.h: new format flag.
+        assert_ne!(ffi::AVFMT_FIXED_FRAMESIZE, 0);
+        println!(
+            "AVFMT_FIXED_FRAMESIZE (9.0+) OK: {:#x}",
+            ffi::AVFMT_FIXED_FRAMESIZE
+        );
+        // avcodec.h: new codec flag.
+        assert_ne!(ffi::AV_CODEC_FLAG2_FIXED_FRAME_SIZE, 0);
+        println!(
+            "AV_CODEC_FLAG2_FIXED_FRAME_SIZE (9.0+) OK: {:#x}",
+            ffi::AV_CODEC_FLAG2_FIXED_FRAME_SIZE
+        );
+        // avformat.h: AVStreamGroupLCEVC was renamed to AVStreamGroupLayeredVideo
+        // and a new AVStreamGroupType value was added.
+        let _group_ty: Option<ffi::AVStreamGroupLayeredVideo> = None;
+        assert_ne!(ffi::AV_STREAM_GROUP_PARAMS_DOLBY_VISION, 0);
+        println!("AVStreamGroupLayeredVideo + AV_STREAM_GROUP_PARAMS_DOLBY_VISION (9.0+) OK");
+        // packet.h: new side-data types.
+        assert_ne!(ffi::AV_PKT_DATA_HEVC_CONF, 0);
+        assert_ne!(ffi::AV_PKT_DATA_DYNAMIC_HDR_SMPTE_2094_APP5, 0);
+        println!("AV_PKT_DATA_HEVC_CONF + AV_PKT_DATA_DYNAMIC_HDR_SMPTE_2094_APP5 (9.0+) OK");
     }
 }

@@ -171,9 +171,10 @@ jobs:
           cargo test --features ${{ matrix.feature }} --verbose
 
       - name: Run Examples
+        env:
+          FFMPEG_INCLUDE_DIR: ${HOME}/ffmpeg_build/include
+          FFMPEG_PKG_CONFIG_PATH: ${HOME}/ffmpeg_build/lib/pkgconfig
         run: |
-          FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
-          FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
           cargo run --example slice --features ${{ matrix.feature }}
           cargo run --example version_compat --features ${{ matrix.feature }}
 
