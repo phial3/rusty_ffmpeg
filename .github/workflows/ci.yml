@@ -74,11 +74,13 @@ jobs:
           cp -r ./build ~/ffmpeg_build
           cd ../..
 
-      - name: Clippy check
+      - name: Set FFmpeg env
         run: |
-          FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
-          FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
-          cargo clippy --features ${{ matrix.feature }} -- -D warnings
+          echo "FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include" >> "$GITHUB_ENV"
+          echo "FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig" >> "$GITHUB_ENV"
+
+      - name: Clippy check
+        run: cargo clippy --features ${{ matrix.feature }} -- -D warnings
 
   build_static_and_test_ubuntu:
     runs-on: ubuntu-latest
@@ -158,22 +160,18 @@ jobs:
           cp -r ./build ~/ffmpeg_build
           cd ../..
 
-      - name: Clippy check
+      - name: Set FFmpeg env
         run: |
-          FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
-          FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
-          cargo clippy --features ${{ matrix.feature }} -- -D warnings
+          echo "FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include" >> "$GITHUB_ENV"
+          echo "FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig" >> "$GITHUB_ENV"
+
+      - name: Clippy check
+        run: cargo clippy --features ${{ matrix.feature }} -- -D warnings
 
       - name: Run Test
-        run: |
-          FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
-          FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
-          cargo test --features ${{ matrix.feature }} --verbose
+        run: cargo test --features ${{ matrix.feature }} --verbose
 
       - name: Run Examples
-        env:
-          FFMPEG_INCLUDE_DIR: ${HOME}/ffmpeg_build/include
-          FFMPEG_PKG_CONFIG_PATH: ${HOME}/ffmpeg_build/lib/pkgconfig
         run: |
           cargo run --example slice --features ${{ matrix.feature }}
           cargo run --example version_compat --features ${{ matrix.feature }}
