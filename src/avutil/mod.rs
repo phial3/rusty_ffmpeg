@@ -5,6 +5,6 @@ pub mod error;
 #[rustfmt::skip]
 pub mod pixfmt;
 pub mod rational;
-#[cfg(feature = "ffmpeg6")]
+#[cfg(feature = "ffmpeg5_1")]
 #[rustfmt::skip]
 pub mod channel_layout;
