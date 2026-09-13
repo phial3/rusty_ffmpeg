@@ -939,6 +939,8 @@ pub const __MAC_26_2: u32 = 260200;
 pub const __MAC_26_3: u32 = 260300;
 pub const __MAC_26_4: u32 = 260400;
 pub const __MAC_26_5: u32 = 260500;
+pub const __MAC_26_6: u32 = 260600;
+pub const __MAC_27_0: u32 = 270000;
 pub const __IPHONE_2_0: u32 = 20000;
 pub const __IPHONE_2_1: u32 = 20100;
 pub const __IPHONE_2_2: u32 = 20200;
@@ -1033,6 +1035,8 @@ pub const __IPHONE_26_2: u32 = 260200;
 pub const __IPHONE_26_3: u32 = 260300;
 pub const __IPHONE_26_4: u32 = 260400;
 pub const __IPHONE_26_5: u32 = 260500;
+pub const __IPHONE_26_6: u32 = 260600;
+pub const __IPHONE_27_0: u32 = 270000;
 pub const __WATCHOS_1_0: u32 = 10000;
 pub const __WATCHOS_2_0: u32 = 20000;
 pub const __WATCHOS_2_1: u32 = 20100;
@@ -1096,6 +1100,8 @@ pub const __WATCHOS_26_2: u32 = 260200;
 pub const __WATCHOS_26_3: u32 = 260300;
 pub const __WATCHOS_26_4: u32 = 260400;
 pub const __WATCHOS_26_5: u32 = 260500;
+pub const __WATCHOS_26_6: u32 = 260600;
+pub const __WATCHOS_27_0: u32 = 270000;
 pub const __TVOS_9_0: u32 = 90000;
 pub const __TVOS_9_1: u32 = 90100;
 pub const __TVOS_9_2: u32 = 90200;
@@ -1159,6 +1165,8 @@ pub const __TVOS_26_2: u32 = 260200;
 pub const __TVOS_26_3: u32 = 260300;
 pub const __TVOS_26_4: u32 = 260400;
 pub const __TVOS_26_5: u32 = 260500;
+pub const __TVOS_26_6: u32 = 260600;
+pub const __TVOS_27_0: u32 = 270000;
 pub const __BRIDGEOS_2_0: u32 = 20000;
 pub const __BRIDGEOS_3_0: u32 = 30000;
 pub const __BRIDGEOS_3_1: u32 = 30100;
@@ -1198,7 +1206,8 @@ pub const __BRIDGEOS_10_1: u32 = 100100;
 pub const __BRIDGEOS_10_2: u32 = 100200;
 pub const __BRIDGEOS_10_3: u32 = 100300;
 pub const __BRIDGEOS_10_4: u32 = 100400;
-pub const __BRIDGEOS_26_5: u32 = 260500;
+pub const __BRIDGEOS_10_5: u32 = 100500;
+pub const __BRIDGEOS_10_6: u32 = 100600;
 pub const __DRIVERKIT_19_0: u32 = 190000;
 pub const __DRIVERKIT_20_0: u32 = 200000;
 pub const __DRIVERKIT_21_0: u32 = 210000;
@@ -1226,6 +1235,8 @@ pub const __DRIVERKIT_25_2: u32 = 250200;
 pub const __DRIVERKIT_25_3: u32 = 250300;
 pub const __DRIVERKIT_25_4: u32 = 250400;
 pub const __DRIVERKIT_25_5: u32 = 250500;
+pub const __DRIVERKIT_25_6: u32 = 250600;
+pub const __DRIVERKIT_27_0: u32 = 270000;
 pub const __VISIONOS_1_0: u32 = 10000;
 pub const __VISIONOS_1_1: u32 = 10100;
 pub const __VISIONOS_1_2: u32 = 10200;
@@ -1244,6 +1255,8 @@ pub const __VISIONOS_26_2: u32 = 260200;
 pub const __VISIONOS_26_3: u32 = 260300;
 pub const __VISIONOS_26_4: u32 = 260400;
 pub const __VISIONOS_26_5: u32 = 260500;
+pub const __VISIONOS_26_6: u32 = 260600;
+pub const __VISIONOS_27_0: u32 = 270000;
 pub const MAC_OS_X_VERSION_10_0: u32 = 1000;
 pub const MAC_OS_X_VERSION_10_1: u32 = 1010;
 pub const MAC_OS_X_VERSION_10_2: u32 = 1020;
@@ -1322,10 +1335,12 @@ pub const MAC_OS_VERSION_26_2: u32 = 260200;
 pub const MAC_OS_VERSION_26_3: u32 = 260300;
 pub const MAC_OS_VERSION_26_4: u32 = 260400;
 pub const MAC_OS_VERSION_26_5: u32 = 260500;
+pub const MAC_OS_VERSION_26_6: u32 = 260600;
+pub const MAC_OS_VERSION_27_0: u32 = 270000;
 pub const __AVAILABILITY_VERSIONS_VERSION_HASH: u32 = 93585900;
 pub const __AVAILABILITY_VERSIONS_VERSION_STRING: &[u8; 6] = b"Local\0";
 pub const __AVAILABILITY_FILE: &[u8; 23] = b"AvailabilityVersions.h\0";
-pub const __MAC_OS_X_VERSION_MAX_ALLOWED: u32 = 260500;
+pub const __MAC_OS_X_VERSION_MAX_ALLOWED: u32 = 270000;
 pub const __ENABLE_LEGACY_MAC_AVAILABILITY: u32 = 1;
 pub const __DARWIN_WCHAR_MIN: i32 = -2147483648;
 pub const _FORTIFY_SOURCE: u32 = 2;
@@ -1669,12 +1684,13 @@ pub const IOPOL_TYPE_VFS_ATIME_UPDATES: u32 = 2;
 pub const IOPOL_TYPE_VFS_MATERIALIZE_DATALESS_FILES: u32 = 3;
 pub const IOPOL_TYPE_VFS_STATFS_NO_DATA_VOLUME: u32 = 4;
 pub const IOPOL_TYPE_VFS_TRIGGER_RESOLVE: u32 = 5;
-pub const IOPOL_TYPE_VFS_IGNORE_CONTENT_PROTECTION: u32 = 6;
+pub const IOPOL_TYPE_VFS_CONTENT_PROTECTION: u32 = 6;
 pub const IOPOL_TYPE_VFS_IGNORE_PERMISSIONS: u32 = 7;
 pub const IOPOL_TYPE_VFS_SKIP_MTIME_UPDATE: u32 = 8;
 pub const IOPOL_TYPE_VFS_ALLOW_LOW_SPACE_WRITES: u32 = 9;
 pub const IOPOL_TYPE_VFS_DISALLOW_RW_FOR_O_EVTONLY: u32 = 10;
 pub const IOPOL_TYPE_VFS_ENTITLED_RESERVE_ACCESS: u32 = 14;
+pub const IOPOL_TYPE_VFS_IGNORE_CONTENT_PROTECTION: u32 = 6;
 pub const IOPOL_SCOPE_PROCESS: u32 = 0;
 pub const IOPOL_SCOPE_THREAD: u32 = 1;
 pub const IOPOL_SCOPE_DARWIN_BG: u32 = 2;
@@ -1699,6 +1715,7 @@ pub const IOPOL_VFS_TRIGGER_RESOLVE_DEFAULT: u32 = 0;
 pub const IOPOL_VFS_TRIGGER_RESOLVE_OFF: u32 = 1;
 pub const IOPOL_VFS_CONTENT_PROTECTION_DEFAULT: u32 = 0;
 pub const IOPOL_VFS_CONTENT_PROTECTION_IGNORE: u32 = 1;
+pub const IOPOL_VFS_CONTENT_PROTECTION_STRICT: u32 = 2;
 pub const IOPOL_VFS_IGNORE_PERMISSIONS_OFF: u32 = 0;
 pub const IOPOL_VFS_IGNORE_PERMISSIONS_ON: u32 = 1;
 pub const IOPOL_VFS_SKIP_MTIME_UPDATE_OFF: u32 = 0;
@@ -2126,6 +2143,11 @@ pub const AV_OPT_SERIALIZE_SEARCH_CHILDREN: u32 = 4;
 pub const MAX_DWT_LEVELS: u32 = 5;
 pub const DV_PROFILE_BYTES: u32 = 480;
 pub const AV_EXIF_FLAG_RECURSIVE: u32 = 1;
+pub const AV_SMPTE_291M_ANC_PAYLOAD_CAPACITY: u32 = 255;
+pub const AV_SMPTE_436M_CODED_ANC_SAMPLE_CAPACITY: u32 = 259;
+pub const AV_SMPTE_436M_CODED_ANC_PAYLOAD_CAPACITY: u32 = 348;
+pub const AV_SMPTE_291M_ANC_DID_CTA_708: u32 = 97;
+pub const AV_SMPTE_291M_ANC_SDID_CTA_708: u32 = 1;
 pub const VORBIS_FLAG_HEADER: u32 = 1;
 pub const VORBIS_FLAG_COMMENT: u32 = 2;
 pub const VORBIS_FLAG_SETUP: u32 = 4;
@@ -2333,6 +2355,7 @@ pub const FFMPEG_VERSION: &[u8; 6] = b"9.0.1\0";
 pub const AV_FIFO_FLAG_AUTO_GROW: u32 = 1;
 pub const AV_HASH_MAX_SIZE: u32 = 64;
 pub const AV_HDR_PLUS_MAX_PAYLOAD_SIZE: u32 = 907;
+pub const AV_IAMF_LAYER_FLAG_RECON_GAIN: u32 = 1;
 pub const AV_PIX_FMT_FLAG_BE: u32 = 1;
 pub const AV_PIX_FMT_FLAG_PAL: u32 = 2;
 pub const AV_PIX_FMT_FLAG_BITSTREAM: u32 = 4;
@@ -2358,7 +2381,13 @@ pub const AV_LZO_ERROR: u32 = 8;
 pub const AV_LZO_INPUT_PADDING: u32 = 8;
 pub const AV_LZO_OUTPUT_PADDING: u32 = 12;
 pub const TIME_UTC: u32 = 1;
+pub const AV_REFSTRUCT_FLAG_NO_ZEROING: u32 = 1;
+pub const AV_REFSTRUCT_POOL_FLAG_NO_ZEROING: u32 = 1;
+pub const AV_REFSTRUCT_POOL_FLAG_RESET_ON_INIT_ERROR: u32 = 65536;
+pub const AV_REFSTRUCT_POOL_FLAG_FREE_ON_INIT_ERROR: u32 = 131072;
+pub const AV_REFSTRUCT_POOL_FLAG_ZERO_EVERY_TIME: u32 = 262144;
 pub const AV_STEREO3D_FLAG_INVERT: u32 = 1;
+pub const AV_TDRDI_MAX_NUM_REF_DISPLAY: u32 = 32;
 pub const AV_TIMECODE_STR_SIZE: u32 = 23;
 pub const AV_TS_MAX_STRING_SIZE: u32 = 32;
 pub const AV_PRI_UUID : & [u8 ; 101] = b"%02hhx%02hhx%02hhx%02hhx-%02hhx%02hhx-%02hhx%02hhx-%02hhx%02hhx-%02hhx%02hhx%02hhx%02hhx%02hhx%02hhx\0" ;
@@ -5452,7 +5481,10 @@ pub struct rusage_info_v6 {
     pub ri_neural_footprint: u64,
     pub ri_lifetime_max_neural_footprint: u64,
     pub ri_interval_max_neural_footprint: u64,
-    pub ri_reserved: [u64; 9usize],
+    pub ri_conclave_footprint: u64,
+    pub ri_page_wait_time_mach: u64,
+    pub ri_page_cache_hits: u64,
+    pub ri_reserved: [u64; 6usize],
 }
 #[allow(clippy::unnecessary_operation, clippy::identity_op)]
 const _: () = {
@@ -5554,8 +5586,14 @@ const _: () = {
         [::std::mem::offset_of!(rusage_info_v6, ri_lifetime_max_neural_footprint) - 376usize];
     ["Offset of field: rusage_info_v6::ri_interval_max_neural_footprint"]
         [::std::mem::offset_of!(rusage_info_v6, ri_interval_max_neural_footprint) - 384usize];
+    ["Offset of field: rusage_info_v6::ri_conclave_footprint"]
+        [::std::mem::offset_of!(rusage_info_v6, ri_conclave_footprint) - 392usize];
+    ["Offset of field: rusage_info_v6::ri_page_wait_time_mach"]
+        [::std::mem::offset_of!(rusage_info_v6, ri_page_wait_time_mach) - 400usize];
+    ["Offset of field: rusage_info_v6::ri_page_cache_hits"]
+        [::std::mem::offset_of!(rusage_info_v6, ri_page_cache_hits) - 408usize];
     ["Offset of field: rusage_info_v6::ri_reserved"]
-        [::std::mem::offset_of!(rusage_info_v6, ri_reserved) - 392usize];
+        [::std::mem::offset_of!(rusage_info_v6, ri_reserved) - 416usize];
 };
 pub type rusage_info_current = rusage_info_v6;
 #[repr(C)]
@@ -10825,6 +10863,7 @@ unsafe extern "C" {
     #[doc = " Convert valid timing fields (timestamps / durations) in a packet from one\n timebase to another. Timestamps with unknown values (AV_NOPTS_VALUE) will be\n ignored.\n\n @param pkt packet on which the conversion will be performed\n @param tb_src source timebase, in which the timing fields in pkt are\n               expressed\n @param tb_dst destination timebase, to which the timing fields will be\n               converted"]
     pub fn av_packet_rescale_ts(pkt: *mut AVPacket, tb_src: AVRational, tb_dst: AVRational);
 }
+#[doc = " AVContainerFifo is a FIFO for \"containers\" - dynamically allocated reusable\n structs (e.g. AVFrame or AVPacket). AVContainerFifo uses an internal pool of\n such containers to avoid allocating and freeing them repeatedly."]
 #[repr(C)]
 #[derive(Debug)]
 pub struct AVContainerFifo {
@@ -13802,6 +13841,212 @@ unsafe extern "C" {
         time: i64,
     ) -> ::std::os::raw::c_int;
 }
+#[doc = " Iterator over the ANC packets in a single AV_CODEC_ID_SMPTE_436M_ANC AVPacket's data"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVSmpte436mAncIterator {
+    pub anc_packets_left: u16,
+    pub size_left: ::std::os::raw::c_int,
+    pub data_left: *const u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVSmpte436mAncIterator"][::std::mem::size_of::<AVSmpte436mAncIterator>() - 16usize];
+    ["Alignment of AVSmpte436mAncIterator"]
+        [::std::mem::align_of::<AVSmpte436mAncIterator>() - 8usize];
+    ["Offset of field: AVSmpte436mAncIterator::anc_packets_left"]
+        [::std::mem::offset_of!(AVSmpte436mAncIterator, anc_packets_left) - 0usize];
+    ["Offset of field: AVSmpte436mAncIterator::size_left"]
+        [::std::mem::offset_of!(AVSmpte436mAncIterator, size_left) - 4usize];
+    ["Offset of field: AVSmpte436mAncIterator::data_left"]
+        [::std::mem::offset_of!(AVSmpte436mAncIterator, data_left) - 8usize];
+};
+pub const AV_SMPTE_436M_WRAPPING_TYPE_VANC_FRAME: AVSmpte436mWrappingType = 1;
+pub const AV_SMPTE_436M_WRAPPING_TYPE_VANC_FIELD_1: AVSmpte436mWrappingType = 2;
+pub const AV_SMPTE_436M_WRAPPING_TYPE_VANC_FIELD_2: AVSmpte436mWrappingType = 3;
+pub const AV_SMPTE_436M_WRAPPING_TYPE_VANC_PROGRESSIVE_FRAME: AVSmpte436mWrappingType = 4;
+pub const AV_SMPTE_436M_WRAPPING_TYPE_HANC_FRAME: AVSmpte436mWrappingType = 17;
+pub const AV_SMPTE_436M_WRAPPING_TYPE_HANC_FIELD_1: AVSmpte436mWrappingType = 18;
+pub const AV_SMPTE_436M_WRAPPING_TYPE_HANC_FIELD_2: AVSmpte436mWrappingType = 19;
+pub const AV_SMPTE_436M_WRAPPING_TYPE_HANC_PROGRESSIVE_FRAME: AVSmpte436mWrappingType = 20;
+#[doc = " not a real wrapping type, just here to guarantee the enum is big enough"]
+pub const AV_SMPTE_436M_WRAPPING_TYPE_MAX: AVSmpte436mWrappingType = 255;
+#[doc = " Wrapping Type from Table 7 (page 13) of:\n https://pub.smpte.org/latest/st436/s436m-2006.pdf"]
+pub type AVSmpte436mWrappingType = ::std::os::raw::c_uint;
+#[doc = " only used for VBI"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_1BIT_LUMA: AVSmpte436mPayloadSampleCoding = 1;
+#[doc = " only used for VBI"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_1BIT_COLOR_DIFF: AVSmpte436mPayloadSampleCoding = 2;
+#[doc = " only used for VBI"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_1BIT_LUMA_AND_COLOR_DIFF:
+    AVSmpte436mPayloadSampleCoding = 3;
+#[doc = " used for VBI and ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_8BIT_LUMA: AVSmpte436mPayloadSampleCoding = 4;
+#[doc = " used for VBI and ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_8BIT_COLOR_DIFF: AVSmpte436mPayloadSampleCoding = 5;
+#[doc = " used for VBI and ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_8BIT_LUMA_AND_COLOR_DIFF:
+    AVSmpte436mPayloadSampleCoding = 6;
+#[doc = " used for VBI and ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_10BIT_LUMA: AVSmpte436mPayloadSampleCoding = 7;
+#[doc = " used for VBI and ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_10BIT_COLOR_DIFF: AVSmpte436mPayloadSampleCoding = 8;
+#[doc = " used for VBI and ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_10BIT_LUMA_AND_COLOR_DIFF:
+    AVSmpte436mPayloadSampleCoding = 9;
+#[doc = " only used for ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_8BIT_LUMA_WITH_PARITY_ERROR:
+    AVSmpte436mPayloadSampleCoding = 10;
+#[doc = " only used for ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_8BIT_COLOR_DIFF_WITH_PARITY_ERROR:
+    AVSmpte436mPayloadSampleCoding = 11;
+#[doc = " only used for ANC"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_8BIT_LUMA_AND_COLOR_DIFF_WITH_PARITY_ERROR:
+    AVSmpte436mPayloadSampleCoding = 12;
+#[doc = " not a real sample coding, just here to guarantee the enum is big enough"]
+pub const AV_SMPTE_436M_PAYLOAD_SAMPLE_CODING_MAX: AVSmpte436mPayloadSampleCoding = 255;
+#[doc = " Payload Sample Coding from Table 4 (page 10) and Table 7 (page 13) of:\n https://pub.smpte.org/latest/st436/s436m-2006.pdf"]
+pub type AVSmpte436mPayloadSampleCoding = ::std::os::raw::c_uint;
+#[doc = " An ANC packet with an 8-bit payload.\n This can be decoded from AVSmpte436mCodedAnc::payload.\n\n Note: Some ANC packets need a 10-bit payload, if stored in this struct,\n the most-significant 2 bits of each sample are discarded."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVSmpte291mAnc8bit {
+    pub did: u8,
+    pub sdid_or_dbn: u8,
+    pub data_count: u8,
+    pub payload: [u8; 255usize],
+    pub checksum: u8,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVSmpte291mAnc8bit"][::std::mem::size_of::<AVSmpte291mAnc8bit>() - 259usize];
+    ["Alignment of AVSmpte291mAnc8bit"][::std::mem::align_of::<AVSmpte291mAnc8bit>() - 1usize];
+    ["Offset of field: AVSmpte291mAnc8bit::did"]
+        [::std::mem::offset_of!(AVSmpte291mAnc8bit, did) - 0usize];
+    ["Offset of field: AVSmpte291mAnc8bit::sdid_or_dbn"]
+        [::std::mem::offset_of!(AVSmpte291mAnc8bit, sdid_or_dbn) - 1usize];
+    ["Offset of field: AVSmpte291mAnc8bit::data_count"]
+        [::std::mem::offset_of!(AVSmpte291mAnc8bit, data_count) - 2usize];
+    ["Offset of field: AVSmpte291mAnc8bit::payload"]
+        [::std::mem::offset_of!(AVSmpte291mAnc8bit, payload) - 3usize];
+    ["Offset of field: AVSmpte291mAnc8bit::checksum"]
+        [::std::mem::offset_of!(AVSmpte291mAnc8bit, checksum) - 258usize];
+};
+#[doc = " An encoded ANC packet within a single AV_CODEC_ID_SMPTE_436M_ANC AVPacket's data.\n The repeated section of Table 7 (page 13) of:\n https://pub.smpte.org/latest/st436/s436m-2006.pdf"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVSmpte436mCodedAnc {
+    pub line_number: u16,
+    pub wrapping_type: AVSmpte436mWrappingType,
+    pub payload_sample_coding: AVSmpte436mPayloadSampleCoding,
+    pub payload_sample_count: u16,
+    pub payload_array_length: u32,
+    #[doc = " the payload, has size payload_array_length.\n can be decoded into AVSmpte291mAnc8bit"]
+    pub payload: [u8; 348usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVSmpte436mCodedAnc"][::std::mem::size_of::<AVSmpte436mCodedAnc>() - 368usize];
+    ["Alignment of AVSmpte436mCodedAnc"][::std::mem::align_of::<AVSmpte436mCodedAnc>() - 4usize];
+    ["Offset of field: AVSmpte436mCodedAnc::line_number"]
+        [::std::mem::offset_of!(AVSmpte436mCodedAnc, line_number) - 0usize];
+    ["Offset of field: AVSmpte436mCodedAnc::wrapping_type"]
+        [::std::mem::offset_of!(AVSmpte436mCodedAnc, wrapping_type) - 4usize];
+    ["Offset of field: AVSmpte436mCodedAnc::payload_sample_coding"]
+        [::std::mem::offset_of!(AVSmpte436mCodedAnc, payload_sample_coding) - 8usize];
+    ["Offset of field: AVSmpte436mCodedAnc::payload_sample_count"]
+        [::std::mem::offset_of!(AVSmpte436mCodedAnc, payload_sample_count) - 12usize];
+    ["Offset of field: AVSmpte436mCodedAnc::payload_array_length"]
+        [::std::mem::offset_of!(AVSmpte436mCodedAnc, payload_array_length) - 16usize];
+    ["Offset of field: AVSmpte436mCodedAnc::payload"]
+        [::std::mem::offset_of!(AVSmpte436mCodedAnc, payload) - 20usize];
+};
+unsafe extern "C" {
+    #[doc = " Validate a AVSmpte436mCodedAnc structure. Doesn't check if the payload is valid.\n @param[in]  anc ANC packet to validate\n @return 0 on success, AVERROR codes otherwise."]
+    pub fn av_smpte_436m_coded_anc_validate(
+        anc: *const AVSmpte436mCodedAnc,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Encode ANC packets into a single AV_CODEC_ID_SMPTE_436M_ANC AVPacket's data.\n @param[in]  anc_packet_count number of ANC packets to encode\n @param[in]  anc_packets      the ANC packets to encode\n @param[in]  size             the size of out. ignored if out is NULL.\n @param[out] out              Output bytes. Doesn't write anything if out is NULL.\n @return the number of bytes written on success, AVERROR codes otherwise.\n         If out is NULL, returns the number of bytes it would have written."]
+    pub fn av_smpte_436m_anc_encode(
+        out: *mut u8,
+        size: ::std::os::raw::c_int,
+        anc_packet_count: ::std::os::raw::c_int,
+        anc_packets: *const AVSmpte436mCodedAnc,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Append more ANC packets to a single AV_CODEC_ID_SMPTE_436M_ANC AVPacket's data.\n @param[in]  anc_packet_count number of ANC packets to encode\n @param[in]  anc_packets      the ANC packets to encode\n @param      pkt              the AVPacket to append to.\n                              it must either be size 0 or contain valid SMPTE_436M_ANC data.\n @return 0 on success, AVERROR codes otherwise."]
+    pub fn av_smpte_436m_anc_append(
+        pkt: *mut AVPacket,
+        anc_packet_count: ::std::os::raw::c_int,
+        anc_packets: *const AVSmpte436mCodedAnc,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Set up iteration over the ANC packets in a single AV_CODEC_ID_SMPTE_436M_ANC AVPacket's data.\n @param[in]  buf      Pointer to the data from a AV_CODEC_ID_SMPTE_436M_ANC AVPacket.\n @param[in]  buf_size Size of the data from a AV_CODEC_ID_SMPTE_436M_ANC AVPacket.\n @param[out] iter     Pointer to the iterator.\n @return 0 on success, AVERROR codes otherwise."]
+    pub fn av_smpte_436m_anc_iter_init(
+        iter: *mut AVSmpte436mAncIterator,
+        buf: *const u8,
+        buf_size: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Get the next ANC packet from the iterator, advancing the iterator.\n @param[in,out] iter Pointer to the iterator.\n @param[out]    anc  The returned ANC packet.\n @return 0 on success, AVERROR_EOF when the iterator has reached the end, AVERROR codes otherwise."]
+    pub fn av_smpte_436m_anc_iter_next(
+        iter: *mut AVSmpte436mAncIterator,
+        anc: *mut AVSmpte436mCodedAnc,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Get the minimum number of bytes needed to store a AVSmpte436mCodedAnc payload.\n @param sample_coding the payload sample coding\n @param sample_count  the number of samples stored in the payload\n @return returns the minimum number of bytes needed, on error returns < 0.\n         always <= SMPTE_436M_CODED_ANC_PAYLOAD_CAPACITY"]
+    pub fn av_smpte_436m_coded_anc_payload_size(
+        sample_coding: AVSmpte436mPayloadSampleCoding,
+        sample_count: u16,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Decode a AVSmpte436mCodedAnc payload into AVSmpte291mAnc8bit\n @param[in]  sample_coding the payload sample coding\n @param[in]  sample_count  the number of samples stored in the payload\n @param[in]  payload       the bytes storing the payload,\n                           the needed size can be obtained from\navpriv_smpte_436m_coded_anc_payload_size\n @param[in]  log_ctx       context pointer for av_log\n @param[out] out           The decoded ANC packet.\n @return returns 0 on success, otherwise < 0."]
+    pub fn av_smpte_291m_anc_8bit_decode(
+        out: *mut AVSmpte291mAnc8bit,
+        sample_coding: AVSmpte436mPayloadSampleCoding,
+        sample_count: u16,
+        payload: *const u8,
+        log_ctx: *mut ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Fill in the correct checksum for a AVSmpte291mAnc8bit\n @param[in,out] anc The ANC packet."]
+    pub fn av_smpte_291m_anc_8bit_fill_checksum(anc: *mut AVSmpte291mAnc8bit);
+}
+unsafe extern "C" {
+    #[doc = " Compute the sample count needed to encode a AVSmpte291mAnc8bit into a AVSmpte436mCodedAnc payload\n @param[in] anc           The ANC packet.\n @param[in] sample_coding The sample coding.\n @param[in] log_ctx       context pointer for av_log\n @return returns the sample count on success, otherwise < 0."]
+    pub fn av_smpte_291m_anc_8bit_get_sample_count(
+        anc: *const AVSmpte291mAnc8bit,
+        sample_coding: AVSmpte436mPayloadSampleCoding,
+        log_ctx: *mut ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Encode a AVSmpte291mAnc8bit into a AVSmpte436mCodedAnc\n @param[in]  line_number   the line number the ANC packet is on\n @param[in]  wrapping_type the wrapping type\n @param[in]  sample_coding the payload sample coding\n @param[in]  payload       the ANC packet to encode.\n @param[in]  log_ctx       context pointer for av_log\n @param[out] out           The encoded ANC packet.\n @return returns 0 on success, otherwise < 0."]
+    pub fn av_smpte_291m_anc_8bit_encode(
+        out: *mut AVSmpte436mCodedAnc,
+        line_number: u16,
+        wrapping_type: AVSmpte436mWrappingType,
+        sample_coding: AVSmpte436mPayloadSampleCoding,
+        payload: *const AVSmpte291mAnc8bit,
+        log_ctx: *mut ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Try to decode an ANC packet into EIA-608/CTA-708 data (AV_CODEC_ID_EIA_608). This\n @param[in]  anc     The ANC packet.\n @param[in]  log_ctx Context pointer for av_log\n @param[out] cc_data the buffer to store the extracted EIA-608/CTA-708 data,\n                     you can pass NULL to not store the data.\n                     the required size is 3 * cc_count bytes.\n                     SMPTE_291M_ANC_PAYLOAD_CAPACITY is always enough size.\n @return returns cc_count (>= 0) on success, AVERROR(EAGAIN) if it wasn't a CTA-708 ANC packet, < 0 on error."]
+    pub fn av_smpte_291m_anc_8bit_extract_cta_708(
+        anc: *const AVSmpte291mAnc8bit,
+        cc_data: *mut u8,
+        log_ctx: *mut ::std::os::raw::c_void,
+    ) -> ::std::os::raw::c_int;
+}
 #[repr(C)]
 #[derive(Debug)]
 pub struct AVVorbisParseContext {
@@ -14906,16 +15151,6 @@ pub const AV_STREAM_GROUP_PARAMS_LCEVC: AVStreamGroupParamsType = 4;
 pub const AV_STREAM_GROUP_PARAMS_TREF: AVStreamGroupParamsType = 5;
 pub const AV_STREAM_GROUP_PARAMS_DOLBY_VISION: AVStreamGroupParamsType = 6;
 pub type AVStreamGroupParamsType = ::std::os::raw::c_uint;
-#[repr(C)]
-#[derive(Debug)]
-pub struct AVIAMFAudioElement {
-    _unused: [u8; 0],
-}
-#[repr(C)]
-#[derive(Debug)]
-pub struct AVIAMFMixPresentation {
-    _unused: [u8; 0],
-}
 #[repr(C)]
 #[derive(Copy, Clone)]
 pub struct AVStreamGroup {
@@ -17293,6 +17528,83 @@ unsafe extern "C" {
     pub fn av_ambient_viewing_environment_create_side_data(
         frame: *mut AVFrame,
     ) -> *mut AVAmbientViewingEnvironment;
+}
+#[doc = " Signal to av_container_fifo_write() that it should make a new reference\n to data in src rather than consume its contents.\n\n @note you must handle this flag manually in your own fifo_transfer()\n       callback"]
+pub const AV_CONTAINER_FIFO_FLAG_REF: AVContainerFifoFlags = 1;
+#[doc = " This and all higher bits in flags may be set to any value by the caller\n and are guaranteed to be passed through to the fifo_transfer() callback\n and not be interpreted by AVContainerFifo code."]
+pub const AV_CONTAINER_FIFO_FLAG_USER: AVContainerFifoFlags = 65536;
+pub type AVContainerFifoFlags = ::std::os::raw::c_uint;
+unsafe extern "C" {
+    #[doc = " Allocate a new AVContainerFifo for the container type defined by provided\n callbacks.\n\n @param opaque user data that will be passed to the callbacks provided to this\n               function\n @param container_alloc allocate a new container instance and return a pointer\n                        to it, or NULL on failure\n @param container_reset reset the provided container instance to a clean state\n @param container_free free the provided container instance\n @param fifo_transfer Transfer the contents of container src to dst.\n @param flags currently unused\n\n @return newly allocated AVContainerFifo, or NULL on failure"]
+    pub fn av_container_fifo_alloc(
+        opaque: *mut ::std::os::raw::c_void,
+        container_alloc: ::std::option::Option<
+            unsafe extern "C" fn(
+                opaque: *mut ::std::os::raw::c_void,
+            ) -> *mut ::std::os::raw::c_void,
+        >,
+        container_reset: ::std::option::Option<
+            unsafe extern "C" fn(
+                opaque: *mut ::std::os::raw::c_void,
+                obj: *mut ::std::os::raw::c_void,
+            ),
+        >,
+        container_free: ::std::option::Option<
+            unsafe extern "C" fn(
+                opaque: *mut ::std::os::raw::c_void,
+                obj: *mut ::std::os::raw::c_void,
+            ),
+        >,
+        fifo_transfer: ::std::option::Option<
+            unsafe extern "C" fn(
+                opaque: *mut ::std::os::raw::c_void,
+                dst: *mut ::std::os::raw::c_void,
+                src: *mut ::std::os::raw::c_void,
+                flags: ::std::os::raw::c_uint,
+            ) -> ::std::os::raw::c_int,
+        >,
+        flags: ::std::os::raw::c_uint,
+    ) -> *mut AVContainerFifo;
+}
+unsafe extern "C" {
+    #[doc = " Allocate an AVContainerFifo instance for AVFrames.\n\n @param flags currently unused"]
+    pub fn av_container_fifo_alloc_avframe(flags: ::std::os::raw::c_uint) -> *mut AVContainerFifo;
+}
+unsafe extern "C" {
+    #[doc = " Free a AVContainerFifo and everything in it."]
+    pub fn av_container_fifo_free(cf: *mut *mut AVContainerFifo);
+}
+unsafe extern "C" {
+    #[doc = " Write the contents of obj to the FIFO.\n\n The fifo_transfer() callback previously provided to av_container_fifo_alloc()\n will be called with obj as src in order to perform the actual transfer."]
+    pub fn av_container_fifo_write(
+        cf: *mut AVContainerFifo,
+        obj: *mut ::std::os::raw::c_void,
+        flags: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Read the next available object from the FIFO into obj.\n\n The fifo_read() callback previously provided to av_container_fifo_alloc()\n will be called with obj as dst in order to perform the actual transfer."]
+    pub fn av_container_fifo_read(
+        cf: *mut AVContainerFifo,
+        obj: *mut ::std::os::raw::c_void,
+        flags: ::std::os::raw::c_uint,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Access objects stored in the FIFO without retrieving them. The\n fifo_transfer() callback will NOT be invoked and the FIFO state will not be\n modified.\n\n @param pobj Pointer to the object stored in the FIFO will be written here on\n             success. The object remains owned by the FIFO and the caller may\n             only access it as long as the FIFO is not modified.\n @param offset Position of the object to retrieve - 0 is the next item that\n               would be read, 1 the one after, etc. Must be smaller than\n               av_container_fifo_can_read().\n\n @retval 0 success, a pointer was written into pobj\n @retval AVERROR(EINVAL) invalid offset value"]
+    pub fn av_container_fifo_peek(
+        cf: *mut AVContainerFifo,
+        pobj: *mut *mut ::std::os::raw::c_void,
+        offset: usize,
+    ) -> ::std::os::raw::c_int;
+}
+unsafe extern "C" {
+    #[doc = " Discard the specified number of elements from the FIFO.\n\n @param nb_elems number of elements to discard, MUST NOT be larger than\n                 av_fifo_can_read(f)"]
+    pub fn av_container_fifo_drain(cf: *mut AVContainerFifo, nb_elems: usize);
+}
+unsafe extern "C" {
+    #[doc = " @return number of objects available for reading"]
+    pub fn av_container_fifo_can_read(cf: *const AVContainerFifo) -> usize;
 }
 #[doc = " Context for an Audio FIFO Buffer.\n\n - Operates at the sample level rather than the byte level.\n - Supports multiple channels with either planar or packed sample format.\n - Automatic reallocation when writing to a full buffer."]
 #[repr(C)]
@@ -20169,6 +20481,457 @@ unsafe extern "C" {
         outlen: ::std::os::raw::c_uint,
     ) -> ::std::os::raw::c_int;
 }
+pub const AV_IAMF_ANIMATION_TYPE_STEP: AVIAMFAnimationType = 0;
+pub const AV_IAMF_ANIMATION_TYPE_LINEAR: AVIAMFAnimationType = 1;
+pub const AV_IAMF_ANIMATION_TYPE_BEZIER: AVIAMFAnimationType = 2;
+#[doc = " @defgroup lavu_iamf Immersive Audio Model and Formats\n @ingroup lavu_audio\n\n Immersive Audio Model and Formats related functions and defines\n\n @defgroup lavu_iamf_params Parameter Definition\n @ingroup lavu_iamf\n @{\n Parameters as defined in section 3.6.1 and 3.8 of IAMF.\n @}\n\n @defgroup lavu_iamf_audio Audio Element\n @ingroup lavu_iamf\n @{\n Audio Elements as defined in section 3.6 of IAMF.\n @}\n\n @defgroup lavu_iamf_mix Mix Presentation\n @ingroup lavu_iamf\n @{\n Mix Presentations as defined in section 3.7 of IAMF.\n @}\n\n @addtogroup lavu_iamf_params\n @{"]
+pub type AVIAMFAnimationType = ::std::os::raw::c_uint;
+#[doc = " Mix Gain Parameter Data as defined in section 3.8.1 of IAMF.\n\n @note This struct's size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVIAMFMixGain {
+    pub av_class: *const AVClass,
+    #[doc = " Duration for the given subblock, in units of\n 1 / @ref AVIAMFParamDefinition.parameter_rate \"parameter_rate\".\n It must not be 0."]
+    pub subblock_duration: ::std::os::raw::c_uint,
+    #[doc = " The type of animation applied to the parameter values."]
+    pub animation_type: AVIAMFAnimationType,
+    #[doc = " Parameter value that is applied at the start of the subblock.\n Applies to all defined Animation Types.\n\n Valid range of values is -128.0 to 128.0"]
+    pub start_point_value: AVRational,
+    #[doc = " Parameter value that is applied at the end of the subblock.\n Applies only to AV_IAMF_ANIMATION_TYPE_LINEAR and\n AV_IAMF_ANIMATION_TYPE_BEZIER Animation Types.\n\n Valid range of values is -128.0 to 128.0"]
+    pub end_point_value: AVRational,
+    #[doc = " Parameter value of the middle control point of a quadratic Bezier\n curve, i.e., its y-axis value.\n Applies only to AV_IAMF_ANIMATION_TYPE_BEZIER Animation Type.\n\n Valid range of values is -128.0 to 128.0"]
+    pub control_point_value: AVRational,
+    #[doc = " Parameter value of the time of the middle control point of a\n quadratic Bezier curve, i.e., its x-axis value.\n Applies only to AV_IAMF_ANIMATION_TYPE_BEZIER Animation Type.\n\n Valid range of values is 0.0 to 1.0"]
+    pub control_point_relative_time: AVRational,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFMixGain"][::std::mem::size_of::<AVIAMFMixGain>() - 48usize];
+    ["Alignment of AVIAMFMixGain"][::std::mem::align_of::<AVIAMFMixGain>() - 8usize];
+    ["Offset of field: AVIAMFMixGain::av_class"]
+        [::std::mem::offset_of!(AVIAMFMixGain, av_class) - 0usize];
+    ["Offset of field: AVIAMFMixGain::subblock_duration"]
+        [::std::mem::offset_of!(AVIAMFMixGain, subblock_duration) - 8usize];
+    ["Offset of field: AVIAMFMixGain::animation_type"]
+        [::std::mem::offset_of!(AVIAMFMixGain, animation_type) - 12usize];
+    ["Offset of field: AVIAMFMixGain::start_point_value"]
+        [::std::mem::offset_of!(AVIAMFMixGain, start_point_value) - 16usize];
+    ["Offset of field: AVIAMFMixGain::end_point_value"]
+        [::std::mem::offset_of!(AVIAMFMixGain, end_point_value) - 24usize];
+    ["Offset of field: AVIAMFMixGain::control_point_value"]
+        [::std::mem::offset_of!(AVIAMFMixGain, control_point_value) - 32usize];
+    ["Offset of field: AVIAMFMixGain::control_point_relative_time"]
+        [::std::mem::offset_of!(AVIAMFMixGain, control_point_relative_time) - 40usize];
+};
+#[doc = " Demixing Info Parameter Data as defined in section 3.8.2 of IAMF.\n\n @note This struct's size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVIAMFDemixingInfo {
+    pub av_class: *const AVClass,
+    #[doc = " Duration for the given subblock, in units of\n 1 / @ref AVIAMFParamDefinition.parameter_rate \"parameter_rate\".\n It must not be 0."]
+    pub subblock_duration: ::std::os::raw::c_uint,
+    #[doc = " Pre-defined combination of demixing parameters."]
+    pub dmixp_mode: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFDemixingInfo"][::std::mem::size_of::<AVIAMFDemixingInfo>() - 16usize];
+    ["Alignment of AVIAMFDemixingInfo"][::std::mem::align_of::<AVIAMFDemixingInfo>() - 8usize];
+    ["Offset of field: AVIAMFDemixingInfo::av_class"]
+        [::std::mem::offset_of!(AVIAMFDemixingInfo, av_class) - 0usize];
+    ["Offset of field: AVIAMFDemixingInfo::subblock_duration"]
+        [::std::mem::offset_of!(AVIAMFDemixingInfo, subblock_duration) - 8usize];
+    ["Offset of field: AVIAMFDemixingInfo::dmixp_mode"]
+        [::std::mem::offset_of!(AVIAMFDemixingInfo, dmixp_mode) - 12usize];
+};
+#[doc = " Recon Gain Info Parameter Data as defined in section 3.8.3 of IAMF.\n\n @note This struct's size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVIAMFReconGain {
+    pub av_class: *const AVClass,
+    #[doc = " Duration for the given subblock, in units of\n 1 / @ref AVIAMFParamDefinition.parameter_rate \"parameter_rate\".\n It must not be 0."]
+    pub subblock_duration: ::std::os::raw::c_uint,
+    #[doc = " Array of gain values to be applied to each channel for each layer\n defined in the Audio Element referencing the parent Parameter Definition.\n Values for layers where the AV_IAMF_LAYER_FLAG_RECON_GAIN flag is not set\n are undefined.\n\n Channel order is: FL, C, FR, SL, SR, TFL, TFR, BL, BR, TBL, TBR, LFE"]
+    pub recon_gain: [[u8; 12usize]; 6usize],
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFReconGain"][::std::mem::size_of::<AVIAMFReconGain>() - 88usize];
+    ["Alignment of AVIAMFReconGain"][::std::mem::align_of::<AVIAMFReconGain>() - 8usize];
+    ["Offset of field: AVIAMFReconGain::av_class"]
+        [::std::mem::offset_of!(AVIAMFReconGain, av_class) - 0usize];
+    ["Offset of field: AVIAMFReconGain::subblock_duration"]
+        [::std::mem::offset_of!(AVIAMFReconGain, subblock_duration) - 8usize];
+    ["Offset of field: AVIAMFReconGain::recon_gain"]
+        [::std::mem::offset_of!(AVIAMFReconGain, recon_gain) - 12usize];
+};
+#[doc = " Subblocks are of struct type AVIAMFMixGain"]
+pub const AV_IAMF_PARAMETER_DEFINITION_MIX_GAIN: AVIAMFParamDefinitionType = 0;
+#[doc = " Subblocks are of struct type AVIAMFDemixingInfo"]
+pub const AV_IAMF_PARAMETER_DEFINITION_DEMIXING: AVIAMFParamDefinitionType = 1;
+#[doc = " Subblocks are of struct type AVIAMFReconGain"]
+pub const AV_IAMF_PARAMETER_DEFINITION_RECON_GAIN: AVIAMFParamDefinitionType = 2;
+pub type AVIAMFParamDefinitionType = ::std::os::raw::c_uint;
+#[doc = " Parameters as defined in section 3.6.1 of IAMF.\n\n The struct is allocated by av_iamf_param_definition_alloc() along with an\n array of subblocks, its type depending on the value of type.\n This array is placed subblocks_offset bytes after the start of this struct.\n\n @note This struct's size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVIAMFParamDefinition {
+    pub av_class: *const AVClass,
+    #[doc = " Offset in bytes from the start of this struct, at which the subblocks\n array is located."]
+    pub subblocks_offset: usize,
+    #[doc = " Size in bytes of each element in the subblocks array."]
+    pub subblock_size: usize,
+    #[doc = " Number of subblocks in the array."]
+    pub nb_subblocks: ::std::os::raw::c_uint,
+    #[doc = " Parameters type. Determines the type of the subblock elements."]
+    pub type_: AVIAMFParamDefinitionType,
+    #[doc = " Identifier for the parameter substream."]
+    pub parameter_id: ::std::os::raw::c_uint,
+    #[doc = " Sample rate for the parameter substream. It must not be 0."]
+    pub parameter_rate: ::std::os::raw::c_uint,
+    #[doc = " The accumulated duration of all blocks in this parameter definition,\n in units of 1 / @ref parameter_rate.\n\n May be 0, in which case all duration values should be specified in\n another parameter definition referencing the same parameter_id."]
+    pub duration: ::std::os::raw::c_uint,
+    #[doc = " The duration of every subblock in the case where all subblocks, with\n the optional exception of the last subblock, have equal durations.\n\n Must be 0 if subblocks have different durations."]
+    pub constant_subblock_duration: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFParamDefinition"][::std::mem::size_of::<AVIAMFParamDefinition>() - 48usize];
+    ["Alignment of AVIAMFParamDefinition"]
+        [::std::mem::align_of::<AVIAMFParamDefinition>() - 8usize];
+    ["Offset of field: AVIAMFParamDefinition::av_class"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, av_class) - 0usize];
+    ["Offset of field: AVIAMFParamDefinition::subblocks_offset"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, subblocks_offset) - 8usize];
+    ["Offset of field: AVIAMFParamDefinition::subblock_size"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, subblock_size) - 16usize];
+    ["Offset of field: AVIAMFParamDefinition::nb_subblocks"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, nb_subblocks) - 24usize];
+    ["Offset of field: AVIAMFParamDefinition::type_"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, type_) - 28usize];
+    ["Offset of field: AVIAMFParamDefinition::parameter_id"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, parameter_id) - 32usize];
+    ["Offset of field: AVIAMFParamDefinition::parameter_rate"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, parameter_rate) - 36usize];
+    ["Offset of field: AVIAMFParamDefinition::duration"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, duration) - 40usize];
+    ["Offset of field: AVIAMFParamDefinition::constant_subblock_duration"]
+        [::std::mem::offset_of!(AVIAMFParamDefinition, constant_subblock_duration) - 44usize];
+};
+unsafe extern "C" {
+    pub fn av_iamf_param_definition_get_class() -> *const AVClass;
+}
+unsafe extern "C" {
+    #[doc = " Allocates memory for AVIAMFParamDefinition, plus an array of {@code nb_subblocks}\n amount of subblocks of the given type and initializes the variables. Can be\n freed with a normal av_free() call.\n\n @param size if non-NULL, the size in bytes of the resulting data array is written here."]
+    pub fn av_iamf_param_definition_alloc(
+        type_: AVIAMFParamDefinitionType,
+        nb_subblocks: ::std::os::raw::c_uint,
+        size: *mut usize,
+    ) -> *mut AVIAMFParamDefinition;
+}
+pub const AV_IAMF_AMBISONICS_MODE_MONO: AVIAMFAmbisonicsMode = 0;
+pub const AV_IAMF_AMBISONICS_MODE_PROJECTION: AVIAMFAmbisonicsMode = 1;
+#[doc = " @}\n @addtogroup lavu_iamf_audio\n @{"]
+pub type AVIAMFAmbisonicsMode = ::std::os::raw::c_uint;
+#[doc = " A layer defining a Channel Layout in the Audio Element.\n\n When @ref AVIAMFAudioElement.audio_element_type \"the parent's Audio Element type\"\n is AV_IAMF_AUDIO_ELEMENT_TYPE_CHANNEL, this corresponds to an Scalable Channel\n Layout layer as defined in section 3.6.2 of IAMF.\n For AV_IAMF_AUDIO_ELEMENT_TYPE_SCENE, it is an Ambisonics channel\n layout as defined in section 3.6.3 of IAMF.\n\n @note The struct should be allocated with av_iamf_audio_element_add_layer()\n       and its size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct AVIAMFLayer {
+    pub av_class: *const AVClass,
+    pub ch_layout: AVChannelLayout,
+    #[doc = " A bitmask which may contain a combination of AV_IAMF_LAYER_FLAG_* flags."]
+    pub flags: ::std::os::raw::c_uint,
+    #[doc = " Output gain channel flags as defined in section 3.6.2 of IAMF.\n\n This field is defined only if @ref AVIAMFAudioElement.audio_element_type\n \"the parent's Audio Element type\" is AV_IAMF_AUDIO_ELEMENT_TYPE_CHANNEL,\n must be 0 otherwise."]
+    pub output_gain_flags: ::std::os::raw::c_uint,
+    #[doc = " Output gain as defined in section 3.6.2 of IAMF.\n\n Must be 0 if @ref output_gain_flags is 0."]
+    pub output_gain: AVRational,
+    #[doc = " Ambisonics mode as defined in section 3.6.3 of IAMF.\n\n This field is defined only if @ref AVIAMFAudioElement.audio_element_type\n \"the parent's Audio Element type\" is AV_IAMF_AUDIO_ELEMENT_TYPE_SCENE.\n\n If AV_IAMF_AMBISONICS_MODE_MONO, channel_mapping is defined implicitly\n (Ambisonic Order) or explicitly (Custom Order with ambi channels) in\n @ref ch_layout.\n If AV_IAMF_AMBISONICS_MODE_PROJECTION, @ref demixing_matrix must be set."]
+    pub ambisonics_mode: AVIAMFAmbisonicsMode,
+    #[doc = " Demixing matrix as defined in section 3.6.3 of IAMF.\n\n May be set only if @ref ambisonics_mode == AV_IAMF_AMBISONICS_MODE_PROJECTION,\n must be NULL otherwise."]
+    pub demixing_matrix: *mut AVRational,
+    #[doc = " The length of the Demixing matrix array. Must be ch_layout.nb_channels multiplied\n by the sum of the amount of streams in the group plus the amount of streams in\n the group that are stereo."]
+    pub nb_demixing_matrix: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFLayer"][::std::mem::size_of::<AVIAMFLayer>() - 72usize];
+    ["Alignment of AVIAMFLayer"][::std::mem::align_of::<AVIAMFLayer>() - 8usize];
+    ["Offset of field: AVIAMFLayer::av_class"]
+        [::std::mem::offset_of!(AVIAMFLayer, av_class) - 0usize];
+    ["Offset of field: AVIAMFLayer::ch_layout"]
+        [::std::mem::offset_of!(AVIAMFLayer, ch_layout) - 8usize];
+    ["Offset of field: AVIAMFLayer::flags"][::std::mem::offset_of!(AVIAMFLayer, flags) - 32usize];
+    ["Offset of field: AVIAMFLayer::output_gain_flags"]
+        [::std::mem::offset_of!(AVIAMFLayer, output_gain_flags) - 36usize];
+    ["Offset of field: AVIAMFLayer::output_gain"]
+        [::std::mem::offset_of!(AVIAMFLayer, output_gain) - 40usize];
+    ["Offset of field: AVIAMFLayer::ambisonics_mode"]
+        [::std::mem::offset_of!(AVIAMFLayer, ambisonics_mode) - 48usize];
+    ["Offset of field: AVIAMFLayer::demixing_matrix"]
+        [::std::mem::offset_of!(AVIAMFLayer, demixing_matrix) - 56usize];
+    ["Offset of field: AVIAMFLayer::nb_demixing_matrix"]
+        [::std::mem::offset_of!(AVIAMFLayer, nb_demixing_matrix) - 64usize];
+};
+impl ::std::fmt::Debug for AVIAMFLayer {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        write!(
+            f,
+            "AVIAMFLayer {{ av_class: {:?}, ch_layout: {:?}, flags: {:?}, output_gain_flags: {:?}, output_gain: {:?}, ambisonics_mode: {:?}, demixing_matrix: {:?}, nb_demixing_matrix: {:?} }}",
+            self.av_class,
+            self.ch_layout,
+            self.flags,
+            self.output_gain_flags,
+            self.output_gain,
+            self.ambisonics_mode,
+            self.demixing_matrix,
+            self.nb_demixing_matrix
+        )
+    }
+}
+pub const AV_IAMF_AUDIO_ELEMENT_TYPE_CHANNEL: AVIAMFAudioElementType = 0;
+pub const AV_IAMF_AUDIO_ELEMENT_TYPE_SCENE: AVIAMFAudioElementType = 1;
+pub type AVIAMFAudioElementType = ::std::os::raw::c_uint;
+#[doc = " Information on how to combine one or more audio streams, as defined in\n section 3.6 of IAMF.\n\n @note The struct should be allocated with av_iamf_audio_element_alloc()\n       and its size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVIAMFAudioElement {
+    pub av_class: *const AVClass,
+    pub layers: *mut *mut AVIAMFLayer,
+    #[doc = " Number of layers, or channel groups, in the Audio Element.\n There may be 6 layers at most, and for @ref audio_element_type\n AV_IAMF_AUDIO_ELEMENT_TYPE_SCENE, there may be exactly 1.\n\n Set by av_iamf_audio_element_add_layer(), must not be\n modified by any other code."]
+    pub nb_layers: ::std::os::raw::c_uint,
+    #[doc = " Demixing information used to reconstruct a scalable channel audio\n representation.\n The @ref AVIAMFParamDefinition.type \"type\" must be\n AV_IAMF_PARAMETER_DEFINITION_DEMIXING."]
+    pub demixing_info: *mut AVIAMFParamDefinition,
+    #[doc = " Recon gain information used to reconstruct a scalable channel audio\n representation.\n The @ref AVIAMFParamDefinition.type \"type\" must be\n AV_IAMF_PARAMETER_DEFINITION_RECON_GAIN."]
+    pub recon_gain_info: *mut AVIAMFParamDefinition,
+    #[doc = " Audio element type as defined in section 3.6 of IAMF."]
+    pub audio_element_type: AVIAMFAudioElementType,
+    #[doc = " Default weight value as defined in section 3.6 of IAMF."]
+    pub default_w: ::std::os::raw::c_uint,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFAudioElement"][::std::mem::size_of::<AVIAMFAudioElement>() - 48usize];
+    ["Alignment of AVIAMFAudioElement"][::std::mem::align_of::<AVIAMFAudioElement>() - 8usize];
+    ["Offset of field: AVIAMFAudioElement::av_class"]
+        [::std::mem::offset_of!(AVIAMFAudioElement, av_class) - 0usize];
+    ["Offset of field: AVIAMFAudioElement::layers"]
+        [::std::mem::offset_of!(AVIAMFAudioElement, layers) - 8usize];
+    ["Offset of field: AVIAMFAudioElement::nb_layers"]
+        [::std::mem::offset_of!(AVIAMFAudioElement, nb_layers) - 16usize];
+    ["Offset of field: AVIAMFAudioElement::demixing_info"]
+        [::std::mem::offset_of!(AVIAMFAudioElement, demixing_info) - 24usize];
+    ["Offset of field: AVIAMFAudioElement::recon_gain_info"]
+        [::std::mem::offset_of!(AVIAMFAudioElement, recon_gain_info) - 32usize];
+    ["Offset of field: AVIAMFAudioElement::audio_element_type"]
+        [::std::mem::offset_of!(AVIAMFAudioElement, audio_element_type) - 40usize];
+    ["Offset of field: AVIAMFAudioElement::default_w"]
+        [::std::mem::offset_of!(AVIAMFAudioElement, default_w) - 44usize];
+};
+unsafe extern "C" {
+    pub fn av_iamf_audio_element_get_class() -> *const AVClass;
+}
+unsafe extern "C" {
+    #[doc = " Allocates a AVIAMFAudioElement, and initializes its fields with default values.\n No layers are allocated. Must be freed with av_iamf_audio_element_free().\n\n @see av_iamf_audio_element_add_layer()"]
+    pub fn av_iamf_audio_element_alloc() -> *mut AVIAMFAudioElement;
+}
+unsafe extern "C" {
+    #[doc = " Allocate a layer and add it to a given AVIAMFAudioElement.\n It is freed by av_iamf_audio_element_free() alongside the rest of the parent\n AVIAMFAudioElement.\n\n @return a pointer to the allocated layer."]
+    pub fn av_iamf_audio_element_add_layer(
+        audio_element: *mut AVIAMFAudioElement,
+    ) -> *mut AVIAMFLayer;
+}
+unsafe extern "C" {
+    #[doc = " Free an AVIAMFAudioElement and all its contents.\n\n @param audio_element pointer to pointer to an allocated AVIAMFAudioElement.\n                      upon return, *audio_element will be set to NULL."]
+    pub fn av_iamf_audio_element_free(audio_element: *mut *mut AVIAMFAudioElement);
+}
+#[doc = " The referenced Audio Element shall be rendered to stereo loudspeakers."]
+pub const AV_IAMF_HEADPHONES_MODE_STEREO: AVIAMFHeadphonesMode = 0;
+#[doc = " The referenced Audio Element shall be rendered with a binaural renderer."]
+pub const AV_IAMF_HEADPHONES_MODE_BINAURAL: AVIAMFHeadphonesMode = 1;
+#[doc = " @}\n @addtogroup lavu_iamf_mix\n @{"]
+pub type AVIAMFHeadphonesMode = ::std::os::raw::c_uint;
+#[doc = " Submix element as defined in section 3.7 of IAMF.\n\n @note The struct should be allocated with av_iamf_submix_add_element()\n       and its size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVIAMFSubmixElement {
+    pub av_class: *const AVClass,
+    #[doc = " The id of the Audio Element this submix element references."]
+    pub audio_element_id: ::std::os::raw::c_uint,
+    #[doc = " Information required required for applying any processing to the\n referenced and rendered Audio Element before being summed with other\n processed Audio Elements.\n The @ref AVIAMFParamDefinition.type \"type\" must be\n AV_IAMF_PARAMETER_DEFINITION_MIX_GAIN."]
+    pub element_mix_config: *mut AVIAMFParamDefinition,
+    #[doc = " Default mix gain value to apply when there are no AVIAMFParamDefinition\n with @ref element_mix_config \"element_mix_config's\"\n @ref AVIAMFParamDefinition.parameter_id \"parameter_id\" available for a\n given audio frame."]
+    pub default_mix_gain: AVRational,
+    #[doc = " A value that indicates whether the referenced channel-based Audio Element\n shall be rendered to stereo loudspeakers or spatialized with a binaural\n renderer when played back on headphones.\n If the Audio Element is not of @ref AVIAMFAudioElement.audio_element_type\n \"type\" AV_IAMF_AUDIO_ELEMENT_TYPE_CHANNEL, then this field is undefined."]
+    pub headphones_rendering_mode: AVIAMFHeadphonesMode,
+    #[doc = " A dictionary of strings describing the submix in different languages.\n Must have the same amount of entries as\n @ref AVIAMFMixPresentation.annotations \"the mix's annotations\", stored\n in the same order, and with the same key strings.\n\n @ref AVDictionaryEntry.key \"key\" is a string conforming to BCP-47 that\n specifies the language for the string stored in\n @ref AVDictionaryEntry.value \"value\"."]
+    pub annotations: *mut AVDictionary,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFSubmixElement"][::std::mem::size_of::<AVIAMFSubmixElement>() - 48usize];
+    ["Alignment of AVIAMFSubmixElement"][::std::mem::align_of::<AVIAMFSubmixElement>() - 8usize];
+    ["Offset of field: AVIAMFSubmixElement::av_class"]
+        [::std::mem::offset_of!(AVIAMFSubmixElement, av_class) - 0usize];
+    ["Offset of field: AVIAMFSubmixElement::audio_element_id"]
+        [::std::mem::offset_of!(AVIAMFSubmixElement, audio_element_id) - 8usize];
+    ["Offset of field: AVIAMFSubmixElement::element_mix_config"]
+        [::std::mem::offset_of!(AVIAMFSubmixElement, element_mix_config) - 16usize];
+    ["Offset of field: AVIAMFSubmixElement::default_mix_gain"]
+        [::std::mem::offset_of!(AVIAMFSubmixElement, default_mix_gain) - 24usize];
+    ["Offset of field: AVIAMFSubmixElement::headphones_rendering_mode"]
+        [::std::mem::offset_of!(AVIAMFSubmixElement, headphones_rendering_mode) - 32usize];
+    ["Offset of field: AVIAMFSubmixElement::annotations"]
+        [::std::mem::offset_of!(AVIAMFSubmixElement, annotations) - 40usize];
+};
+#[doc = " The layout follows the loudspeaker sound system convention of ITU-2051-3.\n @ref AVIAMFSubmixLayout.sound_system must be set."]
+pub const AV_IAMF_SUBMIX_LAYOUT_TYPE_LOUDSPEAKERS: AVIAMFSubmixLayoutType = 2;
+#[doc = " The layout is binaural.\n\n @note @ref AVIAMFSubmixLayout.sound_system may be set to\n AV_CHANNEL_LAYOUT_BINAURAL to simplify API usage, but it's not mandatory."]
+pub const AV_IAMF_SUBMIX_LAYOUT_TYPE_BINAURAL: AVIAMFSubmixLayoutType = 3;
+pub type AVIAMFSubmixLayoutType = ::std::os::raw::c_uint;
+#[doc = " Submix layout as defined in section 3.7.6 of IAMF.\n\n @note The struct should be allocated with av_iamf_submix_add_layout()\n       and its size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct AVIAMFSubmixLayout {
+    pub av_class: *const AVClass,
+    pub layout_type: AVIAMFSubmixLayoutType,
+    #[doc = " Channel layout matching one of Sound Systems A to J of ITU-2051-3, plus\n 7.1.2ch, 3.1.2ch, and binaural.\n If layout_type is not AV_IAMF_SUBMIX_LAYOUT_TYPE_LOUDSPEAKERS or\n AV_IAMF_SUBMIX_LAYOUT_TYPE_BINAURAL, this field is undefined."]
+    pub sound_system: AVChannelLayout,
+    #[doc = " The program integrated loudness information, as defined in\n ITU-1770-4."]
+    pub integrated_loudness: AVRational,
+    #[doc = " The digital (sampled) peak value of the audio signal, as defined\n in ITU-1770-4."]
+    pub digital_peak: AVRational,
+    #[doc = " The true peak of the audio signal, as defined in ITU-1770-4."]
+    pub true_peak: AVRational,
+    #[doc = " The Dialogue loudness information, as defined in ITU-1770-4."]
+    pub dialogue_anchored_loudness: AVRational,
+    #[doc = " The Album loudness information, as defined in ITU-1770-4."]
+    pub album_anchored_loudness: AVRational,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFSubmixLayout"][::std::mem::size_of::<AVIAMFSubmixLayout>() - 80usize];
+    ["Alignment of AVIAMFSubmixLayout"][::std::mem::align_of::<AVIAMFSubmixLayout>() - 8usize];
+    ["Offset of field: AVIAMFSubmixLayout::av_class"]
+        [::std::mem::offset_of!(AVIAMFSubmixLayout, av_class) - 0usize];
+    ["Offset of field: AVIAMFSubmixLayout::layout_type"]
+        [::std::mem::offset_of!(AVIAMFSubmixLayout, layout_type) - 8usize];
+    ["Offset of field: AVIAMFSubmixLayout::sound_system"]
+        [::std::mem::offset_of!(AVIAMFSubmixLayout, sound_system) - 16usize];
+    ["Offset of field: AVIAMFSubmixLayout::integrated_loudness"]
+        [::std::mem::offset_of!(AVIAMFSubmixLayout, integrated_loudness) - 40usize];
+    ["Offset of field: AVIAMFSubmixLayout::digital_peak"]
+        [::std::mem::offset_of!(AVIAMFSubmixLayout, digital_peak) - 48usize];
+    ["Offset of field: AVIAMFSubmixLayout::true_peak"]
+        [::std::mem::offset_of!(AVIAMFSubmixLayout, true_peak) - 56usize];
+    ["Offset of field: AVIAMFSubmixLayout::dialogue_anchored_loudness"]
+        [::std::mem::offset_of!(AVIAMFSubmixLayout, dialogue_anchored_loudness) - 64usize];
+    ["Offset of field: AVIAMFSubmixLayout::album_anchored_loudness"]
+        [::std::mem::offset_of!(AVIAMFSubmixLayout, album_anchored_loudness) - 72usize];
+};
+impl ::std::fmt::Debug for AVIAMFSubmixLayout {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        write!(
+            f,
+            "AVIAMFSubmixLayout {{ av_class: {:?}, layout_type: {:?}, sound_system: {:?}, integrated_loudness: {:?}, digital_peak: {:?}, true_peak: {:?}, dialogue_anchored_loudness: {:?}, album_anchored_loudness: {:?} }}",
+            self.av_class,
+            self.layout_type,
+            self.sound_system,
+            self.integrated_loudness,
+            self.digital_peak,
+            self.true_peak,
+            self.dialogue_anchored_loudness,
+            self.album_anchored_loudness
+        )
+    }
+}
+#[doc = " Submix layout as defined in section 3.7 of IAMF.\n\n @note The struct should be allocated with av_iamf_mix_presentation_add_submix()\n       and its size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVIAMFSubmix {
+    pub av_class: *const AVClass,
+    #[doc = " Array of submix elements.\n\n Set by av_iamf_submix_add_element(), must not be modified by any\n other code."]
+    pub elements: *mut *mut AVIAMFSubmixElement,
+    #[doc = " Number of elements in the submix.\n\n Set by av_iamf_submix_add_element(), must not be modified by any\n other code."]
+    pub nb_elements: ::std::os::raw::c_uint,
+    #[doc = " Array of submix layouts.\n\n Set by av_iamf_submix_add_layout(), must not be modified by any\n other code."]
+    pub layouts: *mut *mut AVIAMFSubmixLayout,
+    #[doc = " Number of layouts in the submix.\n\n Set by av_iamf_submix_add_layout(), must not be modified by any\n other code."]
+    pub nb_layouts: ::std::os::raw::c_uint,
+    #[doc = " Information required for post-processing the mixed audio signal to\n generate the audio signal for playback.\n The @ref AVIAMFParamDefinition.type \"type\" must be\n AV_IAMF_PARAMETER_DEFINITION_MIX_GAIN."]
+    pub output_mix_config: *mut AVIAMFParamDefinition,
+    #[doc = " Default mix gain value to apply when there are no AVIAMFParamDefinition\n with @ref output_mix_config \"output_mix_config's\"\n @ref AVIAMFParamDefinition.parameter_id \"parameter_id\" available for a\n given audio frame."]
+    pub default_mix_gain: AVRational,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFSubmix"][::std::mem::size_of::<AVIAMFSubmix>() - 56usize];
+    ["Alignment of AVIAMFSubmix"][::std::mem::align_of::<AVIAMFSubmix>() - 8usize];
+    ["Offset of field: AVIAMFSubmix::av_class"]
+        [::std::mem::offset_of!(AVIAMFSubmix, av_class) - 0usize];
+    ["Offset of field: AVIAMFSubmix::elements"]
+        [::std::mem::offset_of!(AVIAMFSubmix, elements) - 8usize];
+    ["Offset of field: AVIAMFSubmix::nb_elements"]
+        [::std::mem::offset_of!(AVIAMFSubmix, nb_elements) - 16usize];
+    ["Offset of field: AVIAMFSubmix::layouts"]
+        [::std::mem::offset_of!(AVIAMFSubmix, layouts) - 24usize];
+    ["Offset of field: AVIAMFSubmix::nb_layouts"]
+        [::std::mem::offset_of!(AVIAMFSubmix, nb_layouts) - 32usize];
+    ["Offset of field: AVIAMFSubmix::output_mix_config"]
+        [::std::mem::offset_of!(AVIAMFSubmix, output_mix_config) - 40usize];
+    ["Offset of field: AVIAMFSubmix::default_mix_gain"]
+        [::std::mem::offset_of!(AVIAMFSubmix, default_mix_gain) - 48usize];
+};
+#[doc = " Information on how to render and mix one or more AVIAMFAudioElement to generate\n the final audio output, as defined in section 3.7 of IAMF.\n\n @note The struct should be allocated with av_iamf_mix_presentation_alloc()\n       and its size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVIAMFMixPresentation {
+    pub av_class: *const AVClass,
+    #[doc = " Array of submixes.\n\n Set by av_iamf_mix_presentation_add_submix(), must not be modified\n by any other code."]
+    pub submixes: *mut *mut AVIAMFSubmix,
+    #[doc = " Number of submixes in the presentation.\n\n Set by av_iamf_mix_presentation_add_submix(), must not be modified\n by any other code."]
+    pub nb_submixes: ::std::os::raw::c_uint,
+    #[doc = " A dictionary of strings describing the mix in different languages.\n Must have the same amount of entries as every\n @ref AVIAMFSubmixElement.annotations \"Submix element annotations\",\n stored in the same order, and with the same key strings.\n\n @ref AVDictionaryEntry.key \"key\" is a string conforming to BCP-47\n that specifies the language for the string stored in\n @ref AVDictionaryEntry.value \"value\"."]
+    pub annotations: *mut AVDictionary,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVIAMFMixPresentation"][::std::mem::size_of::<AVIAMFMixPresentation>() - 32usize];
+    ["Alignment of AVIAMFMixPresentation"]
+        [::std::mem::align_of::<AVIAMFMixPresentation>() - 8usize];
+    ["Offset of field: AVIAMFMixPresentation::av_class"]
+        [::std::mem::offset_of!(AVIAMFMixPresentation, av_class) - 0usize];
+    ["Offset of field: AVIAMFMixPresentation::submixes"]
+        [::std::mem::offset_of!(AVIAMFMixPresentation, submixes) - 8usize];
+    ["Offset of field: AVIAMFMixPresentation::nb_submixes"]
+        [::std::mem::offset_of!(AVIAMFMixPresentation, nb_submixes) - 16usize];
+    ["Offset of field: AVIAMFMixPresentation::annotations"]
+        [::std::mem::offset_of!(AVIAMFMixPresentation, annotations) - 24usize];
+};
+unsafe extern "C" {
+    pub fn av_iamf_mix_presentation_get_class() -> *const AVClass;
+}
+unsafe extern "C" {
+    #[doc = " Allocates a AVIAMFMixPresentation, and initializes its fields with default\n values. No submixes are allocated.\n Must be freed with av_iamf_mix_presentation_free().\n\n @see av_iamf_mix_presentation_add_submix()"]
+    pub fn av_iamf_mix_presentation_alloc() -> *mut AVIAMFMixPresentation;
+}
+unsafe extern "C" {
+    #[doc = " Allocate a submix and add it to a given AVIAMFMixPresentation.\n It is freed by av_iamf_mix_presentation_free() alongside the rest of the\n parent AVIAMFMixPresentation.\n\n @return a pointer to the allocated submix."]
+    pub fn av_iamf_mix_presentation_add_submix(
+        mix_presentation: *mut AVIAMFMixPresentation,
+    ) -> *mut AVIAMFSubmix;
+}
+unsafe extern "C" {
+    #[doc = " Allocate a submix element and add it to a given AVIAMFSubmix.\n It is freed by av_iamf_mix_presentation_free() alongside the rest of the\n parent AVIAMFSubmix.\n\n @return a pointer to the allocated submix."]
+    pub fn av_iamf_submix_add_element(submix: *mut AVIAMFSubmix) -> *mut AVIAMFSubmixElement;
+}
+unsafe extern "C" {
+    #[doc = " Allocate a submix layout and add it to a given AVIAMFSubmix.\n It is freed by av_iamf_mix_presentation_free() alongside the rest of the\n parent AVIAMFSubmix.\n\n @return a pointer to the allocated submix."]
+    pub fn av_iamf_submix_add_layout(submix: *mut AVIAMFSubmix) -> *mut AVIAMFSubmixLayout;
+}
+unsafe extern "C" {
+    #[doc = " Free an AVIAMFMixPresentation and all its contents.\n\n @param mix_presentation pointer to pointer to an allocated AVIAMFMixPresentation.\n                         upon return, *mix_presentation will be set to NULL."]
+    pub fn av_iamf_mix_presentation_free(mix_presentation: *mut *mut AVIAMFMixPresentation);
+}
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct AVComponentDescriptor {
@@ -21206,6 +21969,103 @@ unsafe extern "C" {
         log_ctx: *mut ::std::os::raw::c_void,
     ) -> av_pixelutils_sad_fn;
 }
+pub const AV_RAW_COLOR_PARAMS_NONE: AVRawColorParamsType = 0;
+#[doc = " The union is valid when interpreted as AVProResRawColorParams\n (codec.prores_raw)."]
+pub const AV_RAW_COLOR_PARAMS_PRORES_RAW: AVRawColorParamsType = 1;
+pub type AVRawColorParamsType = ::std::os::raw::c_uint;
+#[doc = " ProRes RAW per-frame color transform, parsed from the prrf frame header.\n\n The correct rendering pipeline is:\n  -> (sample - black_level) / (white_level - black_level)\n  -> per-channel white balance (wb_red, 1.0 for G, wb_blue) pre-debayer\n  -> debayer\n  -> color_matrix (camera RGB -> CIE 1931 XYZ relative to D65)\n  -> gain (scene-linear scale)\n\n Black/white levels live on the outer AVRawColorParams. The matrix output\n is linear-light CIE XYZ D65; convert to a working RGB space downstream.\n\n @note The struct must be allocated as part of AVRawColorParams using\n       av_raw_color_params_alloc(). Its size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AVProResRawColorParams {
+    #[doc = " White balance multiplier for the red channel, applied pre-debayer."]
+    pub wb_red: AVRational,
+    #[doc = " White balance multiplier for the blue channel, applied pre-debayer.\n (The green channel is implicit 1.0 for ProRes RAW)"]
+    pub wb_blue: AVRational,
+    #[doc = " 3x3 row-major color matrix from camera RGB to linear-light CIE 1931\n XYZ relative to the D65 illuminant, applied post-debayer.\n out[i] = sum_j color_matrix[i][j] * in[j]."]
+    pub color_matrix: [[AVRational; 3usize]; 3usize],
+    #[doc = " Post-matrix scene-linear scaling factor. Encodes highlight headroom the\n encoder reserved; multiply the matrixed values by this to recover\n scene-linear light."]
+    pub gain: AVRational,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVProResRawColorParams"][::std::mem::size_of::<AVProResRawColorParams>() - 96usize];
+    ["Alignment of AVProResRawColorParams"]
+        [::std::mem::align_of::<AVProResRawColorParams>() - 4usize];
+    ["Offset of field: AVProResRawColorParams::wb_red"]
+        [::std::mem::offset_of!(AVProResRawColorParams, wb_red) - 0usize];
+    ["Offset of field: AVProResRawColorParams::wb_blue"]
+        [::std::mem::offset_of!(AVProResRawColorParams, wb_blue) - 8usize];
+    ["Offset of field: AVProResRawColorParams::color_matrix"]
+        [::std::mem::offset_of!(AVProResRawColorParams, color_matrix) - 16usize];
+    ["Offset of field: AVProResRawColorParams::gain"]
+        [::std::mem::offset_of!(AVProResRawColorParams, gain) - 88usize];
+};
+#[doc = " Per-frame color information for a RAW camera codec. Carried as side data of\n type AV_FRAME_DATA_RAW_COLOR_PARAMS.\n\n The outer struct carries the fields every RAW codec exposes: the sensor's\n valid sample range and the white-balance correlated color temperature.\n The codec union holds the codec-specific transform parameters; `type`\n selects which member of the union is valid.\n\n The codec-specific transform (color_matrix or equivalent) always lands in\n linear-light CIE 1931 XYZ relative to the D65 illuminant, cameras don't\n have standard primaries, so XYZ is the only common target.\n\n @note The struct must be allocated using av_raw_color_params_alloc() or\n       av_raw_color_params_create_side_data(). Its size is not a part of the\n       public ABI."]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub struct AVRawColorParams {
+    #[doc = " Selects which member of `codec` is valid."]
+    pub type_: AVRawColorParamsType,
+    #[doc = " Lowest valid raw sample code (sensor black point)"]
+    pub black_level: AVRational,
+    #[doc = " Highest valid raw sample code (sensor white point)"]
+    pub white_level: AVRational,
+    #[doc = " Color temperature in Kelvin from with the camera's white balance.\n Informational; the math uses the codec-specific white-balance fields.\n 0 if not signaled."]
+    pub wb_cct: u32,
+    pub codec: AVRawColorParams__bindgen_ty_1,
+}
+#[doc = " Additional codec-specific fields."]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union AVRawColorParams__bindgen_ty_1 {
+    pub prores_raw: AVProResRawColorParams,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVRawColorParams__bindgen_ty_1"]
+        [::std::mem::size_of::<AVRawColorParams__bindgen_ty_1>() - 96usize];
+    ["Alignment of AVRawColorParams__bindgen_ty_1"]
+        [::std::mem::align_of::<AVRawColorParams__bindgen_ty_1>() - 4usize];
+    ["Offset of field: AVRawColorParams__bindgen_ty_1::prores_raw"]
+        [::std::mem::offset_of!(AVRawColorParams__bindgen_ty_1, prores_raw) - 0usize];
+};
+impl ::std::fmt::Debug for AVRawColorParams__bindgen_ty_1 {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        write!(f, "AVRawColorParams__bindgen_ty_1 {{ union }}")
+    }
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVRawColorParams"][::std::mem::size_of::<AVRawColorParams>() - 120usize];
+    ["Alignment of AVRawColorParams"][::std::mem::align_of::<AVRawColorParams>() - 4usize];
+    ["Offset of field: AVRawColorParams::type_"]
+        [::std::mem::offset_of!(AVRawColorParams, type_) - 0usize];
+    ["Offset of field: AVRawColorParams::black_level"]
+        [::std::mem::offset_of!(AVRawColorParams, black_level) - 4usize];
+    ["Offset of field: AVRawColorParams::white_level"]
+        [::std::mem::offset_of!(AVRawColorParams, white_level) - 12usize];
+    ["Offset of field: AVRawColorParams::wb_cct"]
+        [::std::mem::offset_of!(AVRawColorParams, wb_cct) - 20usize];
+    ["Offset of field: AVRawColorParams::codec"]
+        [::std::mem::offset_of!(AVRawColorParams, codec) - 24usize];
+};
+impl ::std::fmt::Debug for AVRawColorParams {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        write!(
+            f,
+            "AVRawColorParams {{ type: {:?}, black_level: {:?}, white_level: {:?}, wb_cct: {:?}, codec: {:?} }}",
+            self.type_, self.black_level, self.white_level, self.wb_cct, self.codec
+        )
+    }
+}
+unsafe extern "C" {
+    #[doc = " Allocate an AVRawColorParams structure and zero-initialize it.\n\n @param size if non-NULL, set to sizeof(AVRawColorParams)\n @return the newly allocated struct or NULL on failure"]
+    pub fn av_raw_color_params_alloc(size: *mut usize) -> *mut AVRawColorParams;
+}
+unsafe extern "C" {
+    #[doc = " Allocate and add an AVRawColorParams structure to an existing AVFrame as\n AV_FRAME_DATA_RAW_COLOR_PARAMS side data.\n\n @return the newly allocated struct, or NULL on failure"]
+    pub fn av_raw_color_params_create_side_data(frame: *mut AVFrame) -> *mut AVRawColorParams;
+}
 unsafe extern "C" {
     #[doc = " Get a seed to use in conjunction with random functions.\n This function tries to provide a good seed at a best effort bases.\n Its possible to call this function multiple times if more bits are needed.\n It can be quite slow, which is why it should only be used as seed for a faster\n PRNG. The quality of the seed depends on the platform."]
     pub fn av_get_random_seed() -> u32;
@@ -21253,6 +22113,99 @@ unsafe extern "C" {
         iv: *mut u8,
         decrypt: ::std::os::raw::c_int,
     );
+}
+#[doc = " This union is used for all opaque parameters in this API to spare the user\n to cast const away in case the opaque to use is const-qualified.\n\n The functions provided by this API with an AVRefStructOpaque come in pairs\n named foo_c and foo. The foo function accepts void* as opaque and is just\n a wrapper around the foo_c function; \"_c\" means \"(potentially) const\"."]
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union AVRefStructOpaque {
+    pub nc: *mut ::std::os::raw::c_void,
+    pub c: *const ::std::os::raw::c_void,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AVRefStructOpaque"][::std::mem::size_of::<AVRefStructOpaque>() - 8usize];
+    ["Alignment of AVRefStructOpaque"][::std::mem::align_of::<AVRefStructOpaque>() - 8usize];
+    ["Offset of field: AVRefStructOpaque::nc"]
+        [::std::mem::offset_of!(AVRefStructOpaque, nc) - 0usize];
+    ["Offset of field: AVRefStructOpaque::c"]
+        [::std::mem::offset_of!(AVRefStructOpaque, c) - 0usize];
+};
+impl ::std::fmt::Debug for AVRefStructOpaque {
+    fn fmt(&self, f: &mut ::std::fmt::Formatter<'_>) -> ::std::fmt::Result {
+        write!(f, "AVRefStructOpaque {{ union }}")
+    }
+}
+unsafe extern "C" {
+    #[doc = " Allocate a refcounted object of usable size `size` managed via\n the RefStruct API.\n\n By default (in the absence of flags to the contrary),\n the returned object is initially zeroed.\n\n @param size    Desired usable size of the returned object.\n @param flags   A bitwise combination of AV_REFSTRUCT_FLAG_* flags.\n @param opaque  A pointer that will be passed to the free_cb callback.\n @param free_cb A callback for freeing this object's content\n                when its reference count reaches zero;\n                it must not free the object itself.\n @return A pointer to an object of the desired size or NULL on failure."]
+    pub fn av_refstruct_alloc_ext_c(
+        size: usize,
+        flags: ::std::os::raw::c_uint,
+        opaque: AVRefStructOpaque,
+        free_cb: ::std::option::Option<
+            unsafe extern "C" fn(opaque: AVRefStructOpaque, obj: *mut ::std::os::raw::c_void),
+        >,
+    ) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    #[doc = " Decrement the reference count of the underlying object and automatically\n free the object if there are no more references to it.\n\n `*objp == NULL` is legal and a no-op.\n\n @param objp Pointer to a pointer that is either NULL or points to an object\n             managed via this API. `*objp` is set to NULL on return."]
+    pub fn av_refstruct_unref(objp: *mut ::std::os::raw::c_void);
+}
+unsafe extern "C" {
+    #[doc = " Create a new reference to an object managed via this API,\n i.e. increment the reference count of the underlying object\n and return obj.\n @return a pointer equal to obj."]
+    pub fn av_refstruct_ref(obj: *mut ::std::os::raw::c_void) -> *mut ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    #[doc = " Analog of av_refstruct_ref(), but for constant objects.\n @see av_refstruct_ref()"]
+    pub fn av_refstruct_ref_c(obj: *const ::std::os::raw::c_void) -> *const ::std::os::raw::c_void;
+}
+unsafe extern "C" {
+    #[doc = " Ensure `*dstp` refers to the same object as src.\n\n If `*dstp` is already equal to src, do nothing. Otherwise unreference `*dstp`\n and replace it with a new reference to src in case `src != NULL` (this\n involves incrementing the reference count of src's underlying object) or\n with NULL otherwise.\n\n @param dstp Pointer to a pointer that is either NULL or points to an object\n             managed via this API.\n @param src  A pointer to an object managed via this API or NULL."]
+    pub fn av_refstruct_replace(
+        dstp: *mut ::std::os::raw::c_void,
+        src: *const ::std::os::raw::c_void,
+    );
+}
+unsafe extern "C" {
+    #[doc = " Check whether the reference count of an object managed\n via this API is 1.\n\n @param obj A pointer to an object managed via this API.\n @return 1 if the reference count of obj is 1; 0 otherwise."]
+    pub fn av_refstruct_exclusive(obj: *const ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+#[doc = " The buffer pool. This structure is opaque and not meant to be accessed\n directly. It is allocated with the allocators below and freed with\n av_refstruct_pool_uninit()."]
+#[repr(C)]
+#[derive(Debug)]
+pub struct AVRefStructPool {
+    _unused: [u8; 0],
+}
+unsafe extern "C" {
+    #[doc = " Equivalent to av_refstruct_pool_alloc(size, flags, NULL, NULL, NULL, NULL, NULL)"]
+    pub fn av_refstruct_pool_alloc(
+        size: usize,
+        flags: ::std::os::raw::c_uint,
+    ) -> *mut AVRefStructPool;
+}
+unsafe extern "C" {
+    #[doc = " Allocate an AVRefStructPool, potentially using complex callbacks.\n\n @param size size of the entries of the pool\n @param flags a bitwise combination of AV_REFSTRUCT_POOL_FLAG_* flags\n @param opaque A pointer that will be passed to the callbacks below.\n @param init  A callback that will be called directly after a new entry\n              has been allocated. obj has already been zeroed unless\n              the AV_REFSTRUCT_POOL_FLAG_NO_ZEROING flag is in use.\n @param reset A callback that will be called after an entry has been\n              returned to the pool and before it is reused.\n @param free_entry A callback that will be called when an entry is freed\n                   after the pool has been marked as to be uninitialized.\n @param free       A callback that will be called when the pool itself is\n                   freed (after the last entry has been returned and freed)."]
+    pub fn av_refstruct_pool_alloc_ext_c(
+        size: usize,
+        flags: ::std::os::raw::c_uint,
+        opaque: AVRefStructOpaque,
+        init_cb: ::std::option::Option<
+            unsafe extern "C" fn(
+                opaque: AVRefStructOpaque,
+                obj: *mut ::std::os::raw::c_void,
+            ) -> ::std::os::raw::c_int,
+        >,
+        reset_cb: ::std::option::Option<
+            unsafe extern "C" fn(opaque: AVRefStructOpaque, obj: *mut ::std::os::raw::c_void),
+        >,
+        free_entry_cb: ::std::option::Option<
+            unsafe extern "C" fn(opaque: AVRefStructOpaque, obj: *mut ::std::os::raw::c_void),
+        >,
+        free_cb: ::std::option::Option<unsafe extern "C" fn(opaque: AVRefStructOpaque)>,
+    ) -> *mut AVRefStructPool;
+}
+unsafe extern "C" {
+    #[doc = " Get an object from the pool, reusing an old one from the pool when\n available.\n\n Every call to this function must happen before av_refstruct_pool_uninit().\n Otherwise undefined behaviour may occur.\n\n @param pool the pool from which to get the object\n @return a reference to the object on success, NULL on error."]
+    pub fn av_refstruct_pool_get(pool: *mut AVRefStructPool) -> *mut ::std::os::raw::c_void;
 }
 #[doc = " ReplayGain information (see\n http://wiki.hydrogenaudio.org/index.php?title=ReplayGain_1.0_specification).\n The size of this struct is a part of the public ABI."]
 #[repr(C)]
@@ -21590,6 +22543,91 @@ unsafe extern "C" {
         iv: *mut u8,
         decrypt: ::std::os::raw::c_int,
     );
+}
+#[doc = " This structure describes information about the reference display width(s) and reference\n viewing distance(s) as well as information about the corresponding reference stereo pair(s).\n See section G.14.3.2.3 of ITU-T H.265 for more information.\n\n @note The struct must be allocated with av_tdrdi_alloc() and\n       its size is not a part of the public ABI."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AV3DReferenceDisplaysInfo {
+    #[doc = " The exponent of the maximum allowable truncation error for\n {exponent,mantissa}_ref_display_width as given by 2<sup>(-prec_ref_display_width)</sup>."]
+    pub prec_ref_display_width: u8,
+    #[doc = " A flag to indicate the presence of reference viewing distance.\n If false, the values of prec_ref_viewing_dist, exponent_ref_viewing_distance,\n and mantissa_ref_viewing_distance are undefined."]
+    pub ref_viewing_distance_flag: u8,
+    #[doc = " The exponent of the maximum allowable truncation error for\n {exponent,mantissa}_ref_viewing_distance as given by 2<sup>^(-prec_ref_viewing_dist)</sup>.\n The value of prec_ref_viewing_dist shall be in the range of 0 to 31, inclusive."]
+    pub prec_ref_viewing_dist: u8,
+    #[doc = " The number of reference displays that are signalled in this struct.\n Allowed range is 1 to 32, inclusive."]
+    pub num_ref_displays: u8,
+    #[doc = " Offset in bytes from the beginning of this structure at which the array\n of reference displays starts."]
+    pub entries_offset: usize,
+    #[doc = " Size of each entry in bytes. May not match sizeof(AV3DReferenceDisplay)."]
+    pub entry_size: usize,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AV3DReferenceDisplaysInfo"]
+        [::std::mem::size_of::<AV3DReferenceDisplaysInfo>() - 24usize];
+    ["Alignment of AV3DReferenceDisplaysInfo"]
+        [::std::mem::align_of::<AV3DReferenceDisplaysInfo>() - 8usize];
+    ["Offset of field: AV3DReferenceDisplaysInfo::prec_ref_display_width"]
+        [::std::mem::offset_of!(AV3DReferenceDisplaysInfo, prec_ref_display_width) - 0usize];
+    ["Offset of field: AV3DReferenceDisplaysInfo::ref_viewing_distance_flag"]
+        [::std::mem::offset_of!(AV3DReferenceDisplaysInfo, ref_viewing_distance_flag) - 1usize];
+    ["Offset of field: AV3DReferenceDisplaysInfo::prec_ref_viewing_dist"]
+        [::std::mem::offset_of!(AV3DReferenceDisplaysInfo, prec_ref_viewing_dist) - 2usize];
+    ["Offset of field: AV3DReferenceDisplaysInfo::num_ref_displays"]
+        [::std::mem::offset_of!(AV3DReferenceDisplaysInfo, num_ref_displays) - 3usize];
+    ["Offset of field: AV3DReferenceDisplaysInfo::entries_offset"]
+        [::std::mem::offset_of!(AV3DReferenceDisplaysInfo, entries_offset) - 8usize];
+    ["Offset of field: AV3DReferenceDisplaysInfo::entry_size"]
+        [::std::mem::offset_of!(AV3DReferenceDisplaysInfo, entry_size) - 16usize];
+};
+#[doc = " Data structure for single deference display information.\n It is allocated as a part of AV3DReferenceDisplaysInfo and should be retrieved with\n av_tdrdi_get_display().\n\n sizeof(AV3DReferenceDisplay) is not a part of the ABI and new fields may be\n added to it."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct AV3DReferenceDisplay {
+    #[doc = " The ViewId of the left view of a stereo pair corresponding to the n-th reference display."]
+    pub left_view_id: u16,
+    #[doc = " The ViewId of the left view of a stereo pair corresponding to the n-th reference display."]
+    pub right_view_id: u16,
+    #[doc = " The exponent part of the reference display width of the n-th reference display."]
+    pub exponent_ref_display_width: u8,
+    #[doc = " The mantissa part of the reference display width of the n-th reference display."]
+    pub mantissa_ref_display_width: u8,
+    #[doc = " The exponent part of the reference viewing distance of the n-th reference display."]
+    pub exponent_ref_viewing_distance: u8,
+    #[doc = " The mantissa part of the reference viewing distance of the n-th reference display."]
+    pub mantissa_ref_viewing_distance: u8,
+    #[doc = " An array of flags to indicates that the information about additional horizontal shift of\n the left and right views for the n-th reference display is present."]
+    pub additional_shift_present_flag: u8,
+    #[doc = " The recommended additional horizontal shift for a stereo pair corresponding to the n-th\n reference baseline and the n-th reference display."]
+    pub num_sample_shift: i16,
+}
+#[allow(clippy::unnecessary_operation, clippy::identity_op)]
+const _: () = {
+    ["Size of AV3DReferenceDisplay"][::std::mem::size_of::<AV3DReferenceDisplay>() - 12usize];
+    ["Alignment of AV3DReferenceDisplay"][::std::mem::align_of::<AV3DReferenceDisplay>() - 2usize];
+    ["Offset of field: AV3DReferenceDisplay::left_view_id"]
+        [::std::mem::offset_of!(AV3DReferenceDisplay, left_view_id) - 0usize];
+    ["Offset of field: AV3DReferenceDisplay::right_view_id"]
+        [::std::mem::offset_of!(AV3DReferenceDisplay, right_view_id) - 2usize];
+    ["Offset of field: AV3DReferenceDisplay::exponent_ref_display_width"]
+        [::std::mem::offset_of!(AV3DReferenceDisplay, exponent_ref_display_width) - 4usize];
+    ["Offset of field: AV3DReferenceDisplay::mantissa_ref_display_width"]
+        [::std::mem::offset_of!(AV3DReferenceDisplay, mantissa_ref_display_width) - 5usize];
+    ["Offset of field: AV3DReferenceDisplay::exponent_ref_viewing_distance"]
+        [::std::mem::offset_of!(AV3DReferenceDisplay, exponent_ref_viewing_distance) - 6usize];
+    ["Offset of field: AV3DReferenceDisplay::mantissa_ref_viewing_distance"]
+        [::std::mem::offset_of!(AV3DReferenceDisplay, mantissa_ref_viewing_distance) - 7usize];
+    ["Offset of field: AV3DReferenceDisplay::additional_shift_present_flag"]
+        [::std::mem::offset_of!(AV3DReferenceDisplay, additional_shift_present_flag) - 8usize];
+    ["Offset of field: AV3DReferenceDisplay::num_sample_shift"]
+        [::std::mem::offset_of!(AV3DReferenceDisplay, num_sample_shift) - 10usize];
+};
+unsafe extern "C" {
+    #[doc = " Allocate a AV3DReferenceDisplaysInfo structure and initialize its fields to default\n values.\n\n @return the newly allocated struct or NULL on failure"]
+    pub fn av_tdrdi_alloc(
+        nb_displays: ::std::os::raw::c_uint,
+        size: *mut usize,
+    ) -> *mut AV3DReferenceDisplaysInfo;
 }
 #[repr(C)]
 #[derive(Debug)]

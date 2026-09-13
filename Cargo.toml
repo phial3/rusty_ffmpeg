@@ -1,9 +1,9 @@
 [package]
 name = "rusty_ffmpeg"
-version = "0.18.0+ffmpeg.9.0"
+version = "0.18.1+ffmpeg.9.0"
 authors = ["ldm0 <ldm2993593805@163.com>"]
 edition = "2024"
-rust-version = "1.85"
+rust-version = "1.89"
 description = "A library that provides Rust bindings for FFmpeg"
 documentation = "https://docs.rs/rusty_ffmpeg"
 repository = "https://github.com/CCExtractor/rusty_ffmpeg/"
