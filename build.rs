@@ -42,6 +42,8 @@ static HEADERS: Lazy<Vec<PathBuf>> = Lazy::new(|| {
         "libavcodec/mediacodec.h",
         "libavcodec/packet.h",
         // "libavcodec/qsv.h",
+        // requires FFmpeg 8.0+
+        "libavcodec/smpte_436m.h",
         // "libavcodec/vdpau.h",
         "libavcodec/version.h",
         "libavcodec/version_major.h",
@@ -64,6 +66,9 @@ static HEADERS: Lazy<Vec<PathBuf>> = Lazy::new(|| {
         "libavutil/aes.h",
         "libavutil/aes_ctr.h",
         "libavutil/ambient_viewing_environment.h",
+        // requires FFmpeg 8.0+
+        // (missing headers are skipped with a warning on older FFmpeg)
+        "libavutil/container_fifo.h",
         "libavutil/attributes.h",
         "libavutil/audio_fifo.h",
         "libavutil/avassert.h",
@@ -102,17 +107,24 @@ static HEADERS: Lazy<Vec<PathBuf>> = Lazy::new(|| {
         "libavutil/hdr_dynamic_vivid_metadata.h",
         "libavutil/hmac.h",
         "libavutil/hwcontext.h",
+        // hwcontext_* headers below require vendor SDKs at build time and are
+        // intentionally excluded to keep the build cross-platform.
+        // "libavutil/hwcontext_amf.h",
         // "libavutil/hwcontext_cuda.h",
         // "libavutil/hwcontext_d3d11va.h",
+        // "libavutil/hwcontext_d3d12va.h",
         // "libavutil/hwcontext_drm.h",
         // "libavutil/hwcontext_dxva2.h",
         // "libavutil/hwcontext_mediacodec.h",
+        // "libavutil/hwcontext_oh.h",
         // "libavutil/hwcontext_opencl.h",
         // "libavutil/hwcontext_qsv.h",
         // "libavutil/hwcontext_vaapi.h",
         // "libavutil/hwcontext_vdpau.h",
         // "libavutil/hwcontext_videotoolbox.h",
         // "libavutil/hwcontext_vulkan.h",
+        // requires FFmpeg 7.0+
+        "libavutil/iamf.h",
         "libavutil/imgutils.h",
         "libavutil/intfloat.h",
         "libavutil/intreadwrite.h",
@@ -131,9 +143,13 @@ static HEADERS: Lazy<Vec<PathBuf>> = Lazy::new(|| {
         "libavutil/pixdesc.h",
         "libavutil/pixelutils.h",
         "libavutil/pixfmt.h",
+        // requires FFmpeg 9.0+
+        "libavutil/raw_color_params.h",
         "libavutil/random_seed.h",
         "libavutil/rational.h",
         "libavutil/rc4.h",
+        // requires FFmpeg 8.0+
+        "libavutil/refstruct.h",
         "libavutil/replaygain.h",
         "libavutil/ripemd.h",
         "libavutil/samplefmt.h",
@@ -142,6 +158,8 @@ static HEADERS: Lazy<Vec<PathBuf>> = Lazy::new(|| {
         "libavutil/spherical.h",
         "libavutil/stereo3d.h",
         "libavutil/tea.h",
+        // requires FFmpeg 8.0+
+        "libavutil/tdrdi.h",
         "libavutil/threadmessage.h",
         "libavutil/time.h",
         "libavutil/timecode.h",
@@ -279,7 +297,7 @@ fn generate_bindings(ffmpeg_include_dir: &Path, headers: &[PathBuf]) -> Bindings
         .impl_debug(true)
         // Rust 1.82 stabilizes `unsafe extern` blocks, which are required
         // by the `unsafe_extern_blocks` lint under edition 2024.
-        .rust_target(RustTarget::stable(85, 0).ok().unwrap())
+        .rust_target(RustTarget::stable(89, 0).ok().unwrap())
         .parse_callbacks(Box::new(filter_callback))
         // Add clang path, for `#include` header finding in bindgen process.
         .clang_arg(format!("-I{}", ffmpeg_include_dir))
