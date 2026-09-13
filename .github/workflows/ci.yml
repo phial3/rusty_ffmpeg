@@ -1,12 +1,12 @@
-# We can do more optimization here, e.g. job `rust_clippy_check` compiles
-# FFmpeg, while `build_and_test` also compiles FFmpeg, that takes a lot of time.
+# Note: version-dependent jobs verify against FFmpeg release branches
+# 5.0 ~ 9.0 via matrix, each leg pinning the matching version feature.
 name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, ffmpeg9 ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, ffmpeg9 ]
 
 env:
   CARGO_TERM_COLOR: always
@@ -28,6 +28,76 @@ jobs:
 
   rust_clippy_check_ubuntu:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { branch: "release/5.0", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
+          - { branch: "release/6.0", feature: "ffmpeg6" }
+          - { branch: "release/6.1", feature: "ffmpeg6_1" }
+          - { branch: "release/7.0", feature: "ffmpeg7" }
+          - { branch: "release/7.1", feature: "ffmpeg7_1" }
+          - { branch: "release/8.0", feature: "ffmpeg8" }
+          - { branch: "release/8.1", feature: "ffmpeg8_1" }
+          - { branch: "release/9.0", feature: "ffmpeg9" }
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: stable
+          components: clippy
+
+      - name: Install FFmpegBuildTools
+        run: |
+          sudo apt-get update -qq && sudo apt-get -y install \
+            build-essential \
+            pkg-config
+
+      - name: Build minimal FFmpeg
+        run: |
+          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch ${{ matrix.branch }}
+          cd ffmpeg
+          mkdir build
+          cd build
+          ../configure \
+            --prefix=${PWD}/build \
+            --disable-debug \
+            --disable-programs \
+            --disable-doc \
+            --disable-bsfs \
+            --disable-autodetect \
+            --disable-x86asm
+          make -j$(nproc)
+          make install
+          cp -r ./build ~/ffmpeg_build
+          cd ../..
+
+      - name: Set FFmpeg env
+        run: |
+          echo "FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include" >> "$GITHUB_ENV"
+          echo "FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig" >> "$GITHUB_ENV"
+
+      - name: Clippy check
+        run: cargo clippy --features ${{ matrix.feature }} -- -D warnings
+
+  build_static_and_test_ubuntu:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { branch: "release/5.0", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
+          - { branch: "release/6.0", feature: "ffmpeg6" }
+          - { branch: "release/6.1", feature: "ffmpeg6_1" }
+          - { branch: "release/7.0", feature: "ffmpeg7" }
+          - { branch: "release/7.1", feature: "ffmpeg7_1" }
+          - { branch: "release/8.0", feature: "ffmpeg8" }
+          - { branch: "release/8.1", feature: "ffmpeg8_1" }
+          - { branch: "release/9.0", feature: "ffmpeg9" }
+
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
@@ -70,21 +140,49 @@ jobs:
             libmp3lame-dev \
             libopus-dev
 
-      - run: |
-          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch release/8.0
+      - name: Build FFmpeg
+        run: |
+          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch ${{ matrix.branch }}
           cd ffmpeg
           mkdir build
           cd build
-          ../configure --prefix=${PWD}/build
+          # `--disable-decoder=exr,phm`: workaround "multiple definition of 'ff_init_half2float_tables'"
+          # Ref: `https://github.com/larksuite/rsmpeg/pull/98#issuecomment-1467511193`
+          # `--disable-bsfs`: neither the binding tests nor the examples use bitstream filters.
+          DISABLE_COMPONENTS="--disable-decoder=exr --disable-bsfs"
+          # The phm decoder doesn't exist before FFmpeg 5.1.
+          if [[ "${{ matrix.branch }}" != release/5.* ]]; then
+            DISABLE_COMPONENTS="$DISABLE_COMPONENTS --disable-decoder=phm"
+          fi
+          ../configure $DISABLE_COMPONENTS --prefix=${PWD}/build
           make -j$(nproc)
           make install
           cp -r ./build ~/ffmpeg_build
           cd ../..
 
-      - run: |
-          FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
-          FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
-          cargo clippy --features ffmpeg8 -- -D warnings
+      - name: Set FFmpeg env
+        run: |
+          echo "FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include" >> "$GITHUB_ENV"
+          echo "FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig" >> "$GITHUB_ENV"
+
+      - name: Clippy check
+        run: cargo clippy --features ${{ matrix.feature }} -- -D warnings
+
+      - name: Run Test
+        run: cargo test --features ${{ matrix.feature }} --verbose
+
+      - name: Run Examples
+        run: |
+          cargo run --example slice --features ${{ matrix.feature }}
+          cargo run --example version_compat --features ${{ matrix.feature }}
+
+      - name: Check test result correctness
+        run: |
+          if [[ -z "$(git status --porcelain)" ]]; then
+            echo "0"
+          else
+            echo "1"
+          fi
 
   rust_clippy_check_windows:
     runs-on: windows-latest
@@ -120,7 +218,7 @@ jobs:
         run: |
           ./vcpkg/vcpkg.exe install ffmpeg:x64-windows-static-md
 
-      - name: Clippy check 
+      - name: Clippy check
         env:
           VCPKG_ROOT: ${{ github.workspace }}/vcpkg
           LIBCLANG_PATH: ${{ github.workspace }}/clang/lib
@@ -246,80 +344,6 @@ jobs:
             echo "1"
           fi
 
-  build_static_and_test_ubuntu:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          toolchain: stable
-
-      # https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
-      - name: Install FFmpegBuildTools
-        run: |
-          sudo apt-get update -qq && sudo apt-get -y install \
-            autoconf \
-            automake \
-            build-essential \
-            cmake \
-            git-core \
-            libass-dev \
-            libfreetype6-dev \
-            libgnutls28-dev \
-            libsdl2-dev \
-            libtool \
-            libva-dev \
-            libvdpau-dev \
-            libvorbis-dev \
-            libxcb1-dev \
-            libxcb-shm0-dev \
-            libxcb-xfixes0-dev \
-            pkg-config \
-            texinfo \
-            wget \
-            yasm \
-            zlib1g-dev
-          sudo apt-get -y install nasm
-          sudo apt-get -y install libx264-dev
-          sudo apt-get -y install libx265-dev libnuma-dev
-          sudo apt-get -y install libvpx-dev
-          sudo apt-get -y install libfdk-aac-dev
-          sudo apt-get -y install libmp3lame-dev
-          sudo apt-get -y install libopus-dev
-
-      # Disable exr,phm to workaround "multiple definition of 'ff_init_half2float_tables'"
-      # Ref: `https://github.com/larksuite/rsmpeg/pull/98#issuecomment-1467511193`
-      - run: |
-          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch release/8.0
-          cd ffmpeg
-          mkdir build
-          cd build
-          ../configure --disable-decoder=exr,phm --prefix=${PWD}/build
-          make -j$(nproc)
-          make install
-          cp -r ./build ~/ffmpeg_build
-          cd ../..
-
-      - name: Binding Test
-        run: |
-          FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
-          FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
-          cargo test --features ffmpeg8 --verbose
-
-      - name: Run Slice Example
-        run: |
-          FFMPEG_INCLUDE_DIR=${HOME}/ffmpeg_build/include \
-          FFMPEG_PKG_CONFIG_PATH=${HOME}/ffmpeg_build/lib/pkgconfig \
-          cargo run --example slice
-
-      - name: Check test result correctness
-        run: |
-          if [[ -z "$(git status --porcelain)" ]]; then
-            echo "0"
-          else
-            echo "1"
-          fi
-
   build_with_vcpkg_ffmpeg_windows:
     runs-on: windows-latest
     strategy:
@@ -394,6 +418,20 @@ jobs:
 
   build_dynamic_and_test_ubuntu:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { branch: "release/5.0", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
+          - { branch: "release/6.0", feature: "ffmpeg6" }
+          - { branch: "release/6.1", feature: "ffmpeg6_1" }
+          - { branch: "release/7.0", feature: "ffmpeg7" }
+          - { branch: "release/7.1", feature: "ffmpeg7_1" }
+          - { branch: "release/8.0", feature: "ffmpeg8" }
+          - { branch: "release/8.1", feature: "ffmpeg8_1" }
+          - { branch: "release/9.0", feature: "ffmpeg9" }
+
     steps:
       # https://trac.ffmpeg.org/wiki/CompilationGuide/Ubuntu
       - name: Install FFmpegBuildTools
@@ -452,7 +490,7 @@ jobs:
 
       - name: Build FFmpeg dylib
         run: |
-          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch release/8.0
+          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch ${{ matrix.branch }}
           cd ffmpeg
           mkdir build
           cd build
@@ -487,8 +525,14 @@ jobs:
           make install
           cd build/lib/
           cp ~/x264_prebuilt/lib/libx264.a .
+          # FFmpeg 9 ships libswscale/framepool.c, a shim that directly
+          # includes libavfilter/framepool.c, so both archives define the
+          # same ff_frame_pool_* symbols, which breaks whole-archive linking.
+          # --allow-multiple-definition accepts it (both copies are compiled
+          # from the same source file); it's a no-op on older branches.
           gcc -shared -o libffmpeg.so \
             -Wl,--whole-archive *.a -Wl,--no-whole-archive \
+            -Wl,--allow-multiple-definition \
             -Wl,-Bsymbolic \
             -lz \
             -lm \
@@ -501,17 +545,32 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      - env:
+      - name: Run Slice Example
+        env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt/lib/libffmpeg.so
           LD_LIBRARY_PATH: ${{ github.workspace }}/ffmpeg_prebuilt/lib/
         run: |
           cp -r ~/ffmpeg_prebuilt ${{ github.workspace }}/ffmpeg_prebuilt
-          cargo build --example slice --features ffmpeg8
-          cargo run --example slice --features ffmpeg8
+          cargo build --example slice --features ${{ matrix.feature }}
+          cargo run --example slice --features ${{ matrix.feature }}
 
   build_dynamic_and_test_macos:
     runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { branch: "release/5.0", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
+          - { branch: "release/6.0", feature: "ffmpeg6" }
+          - { branch: "release/6.1", feature: "ffmpeg6_1" }
+          - { branch: "release/7.0", feature: "ffmpeg7" }
+          - { branch: "release/7.1", feature: "ffmpeg7_1" }
+          - { branch: "release/8.0", feature: "ffmpeg8" }
+          - { branch: "release/8.1", feature: "ffmpeg8_1" }
+          - { branch: "release/9.0", feature: "ffmpeg9" }
+
     steps:
       - name: Build x264
         run: |
@@ -526,7 +585,7 @@ jobs:
             --enable-strip \
             --enable-pic \
             --disable-asm \
-            --extra-cflags=-mmacosx-version-min=10.9
+            --extra-cflags=-mmacosx-version-min=10.13
           make -j$(nproc)
           make install
           cp -r ./build ~/x264_prebuilt
@@ -534,12 +593,12 @@ jobs:
 
       - name: Build FFmpeg dylib
         run: |
-          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch release/8.0
+          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch ${{ matrix.branch }}
           cd ffmpeg
           mkdir build
           cd build
           ../configure --help
-          CFLAGS="-mmacosx-version-min=10.9" PKG_CONFIG_PATH="${HOME}/x264_prebuilt/lib/pkgconfig" ../configure \
+          CFLAGS="-mmacosx-version-min=10.13" PKG_CONFIG_PATH="${HOME}/x264_prebuilt/lib/pkgconfig" ../configure \
             --prefix=${PWD}/build \
             --enable-small \
             --disable-debug \
@@ -565,6 +624,12 @@ jobs:
           make install
           cd build/lib/
           cp ~/x264_prebuilt/lib/libx264.a .
+          # FFmpeg 9 ships libswscale/framepool.c, a shim that directly
+          # includes libavfilter/framepool.c, so both archives define the
+          # same ff_frame_pool_* symbols, which breaks -all_load linking.
+          # Drop one copy (they are compiled from the same source file);
+          # `|| true` makes it a no-op on branches without the shim.
+          ar d libswscale.a framepool.o || true
           gcc -shared -o libffmpeg.dylib \
             -framework CoreFoundation \
             -framework CoreMedia \
@@ -575,7 +640,7 @@ jobs:
             -liconv \
             -lz \
             -Wl,-all_load *.a \
-            -mmacosx-version-min=10.9
+            -mmacosx-version-min=10.13
           cd ../..
           cp -r ./build ~/ffmpeg_prebuilt
           cd ../..
@@ -584,17 +649,32 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
-      - env:
+      - name: Run Slice Example
+        env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt/lib/libffmpeg.dylib
         run: |
           cp -r ~/ffmpeg_prebuilt ${{ github.workspace }}/ffmpeg_prebuilt
-          cargo build --example slice --features ffmpeg8
+          cargo build --example slice --features ${{ matrix.feature }}
           cp ${{ github.workspace }}/ffmpeg_prebuilt/lib/libffmpeg.dylib .
-          cargo run --example slice --features ffmpeg8
+          cargo run --example slice --features ${{ matrix.feature }}
 
   build_dynamic_and_test_windows_pre:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { branch: "release/5.0", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
+          - { branch: "release/6.0", feature: "ffmpeg6" }
+          - { branch: "release/6.1", feature: "ffmpeg6_1" }
+          - { branch: "release/7.0", feature: "ffmpeg7" }
+          - { branch: "release/7.1", feature: "ffmpeg7_1" }
+          - { branch: "release/8.0", feature: "ffmpeg8" }
+          - { branch: "release/8.1", feature: "ffmpeg8_1" }
+          - { branch: "release/9.0", feature: "ffmpeg9" }
+
     steps:
       - name: Install deps
         run: |
@@ -620,7 +700,7 @@ jobs:
           cd ../..
       - name: Build FFmpeg
         run: |
-          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch release/8.0
+          git clone https://github.com/ffmpeg/ffmpeg --depth 1 --single-branch --branch ${{ matrix.branch }}
           cd ffmpeg
           mkdir build
           cd build
@@ -657,6 +737,7 @@ jobs:
           i686-w64-mingw32-gcc -shared -o libffmpeg.dll \
             -Wl,--out-implib,libffmpeg.lib \
             -Wl,--whole-archive *.a -Wl,--no-whole-archive \
+            -Wl,--allow-multiple-definition \
             -lgdi32 \
             -lpsapi \
             -lole32 \
@@ -681,26 +762,51 @@ jobs:
             -static-libstdc++
           cd ../..
 
+      - name: Compute artifact name
+        run: |
+          BRANCH='${{ matrix.branch }}'
+          echo "ARTIFACT_NAME=cross_ffmpeg_${BRANCH//\//_}" >> $GITHUB_ENV
+
       - name: Upload Cross Compiled FFmpeg for Windows
         uses: actions/upload-artifact@v4
         with:
-          name: cross_ffmpeg
+          name: ${{ env.ARTIFACT_NAME }}
           path: ffmpeg/build/build
 
   build_dynamic_and_test_windows:
     runs-on: windows-latest
     needs: build_dynamic_and_test_windows_pre
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { branch: "release/5.0", feature: "ffmpeg5" }
+          - { branch: "release/5.1", feature: "ffmpeg5_1" }
+          - { branch: "release/6.0", feature: "ffmpeg6" }
+          - { branch: "release/6.1", feature: "ffmpeg6_1" }
+          - { branch: "release/7.0", feature: "ffmpeg7" }
+          - { branch: "release/7.1", feature: "ffmpeg7_1" }
+          - { branch: "release/8.0", feature: "ffmpeg8" }
+          - { branch: "release/8.1", feature: "ffmpeg8_1" }
+          - { branch: "release/9.0", feature: "ffmpeg9" }
+
     steps:
       - uses: actions/checkout@v4
       - uses: dtolnay/rust-toolchain@stable
         with:
           toolchain: stable
           targets: i686-pc-windows-msvc
- 
+
+      - name: Compute artifact name
+        shell: bash
+        run: |
+          BRANCH='${{ matrix.branch }}'
+          echo "ARTIFACT_NAME=cross_ffmpeg_${BRANCH//\//_}" >> $GITHUB_ENV
+
       - name: Download Cross Compiled FFmpeg for Windows
         uses: actions/download-artifact@v4
         with:
-          name: cross_ffmpeg
+          name: ${{ env.ARTIFACT_NAME }}
           path: ${{ github.workspace }}/ffmpeg_prebuilt_cross
 
       # Using this since it's used by clang-sys's CI
@@ -710,15 +816,16 @@ jobs:
           version: "10.0"
           directory: ${{ github.workspace }}/clang
 
-      - env:
+      - name: Run Slice Example
+        env:
           FFMPEG_INCLUDE_DIR: ${{ github.workspace }}/ffmpeg_prebuilt_cross/include
           FFMPEG_DLL_PATH: ${{ github.workspace }}/ffmpeg_prebuilt_cross/lib/libffmpeg.dll
           LIBCLANG_PATH: ${{ github.workspace }}/clang/lib
           LLVM_CONFIG_PATH: ${{ github.workspace }}/clang/bin/llvm-config
         run: |
-          cargo build --target i686-pc-windows-msvc --example slice  --features ffmpeg8
+          cargo build --target i686-pc-windows-msvc --example slice --features ${{ matrix.feature }}
           copy ${{ github.workspace }}/ffmpeg_prebuilt_cross/lib/libffmpeg.dll .
-          cargo run --target i686-pc-windows-msvc --example slice  --features ffmpeg8
+          cargo run --target i686-pc-windows-msvc --example slice --features ${{ matrix.feature }}
 
   # Check if correct documentation can be generated by docs.rs
   docs_rs_check:
