@@ -4,12 +4,14 @@ name: CI
 
 on:
   push:
-    branches: [ master, ffmpeg9 ]
+    branches: [ master, main ]
   pull_request:
-    branches: [ master, ffmpeg9 ]
+    branches: [ master, main ]
 
 env:
   CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+  CARGO_INCREMENTAL: "0"
 
 jobs:
   rustfmt_check:
